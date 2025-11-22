@@ -46,27 +46,62 @@ public class RoomUI : MonoBehaviour
         if (scanQRButton != null)
             scanQRButton.onClick.AddListener(OnScanQRClicked);
 
-        // 检查是房主还是加入者
-        if (NetworkServer.active)
-        {
-            // 房主：显示房间信息
-            ShowHostUI();
-        }
-        else
-        {
-            // 加入者：显示加入界面
-            ShowJoinUI();
-        }
+        // 延迟检查，等待网络状态稳定
+        StartCoroutine(CheckNetworkStatus());
     }
+    
+    private System.Collections.IEnumerator CheckNetworkStatus()
+    {
+        // 等待更长时间，确保网络状态已初始化
+        yield return new WaitForSeconds(0.5f);
+        
+        // 多次检查，因为网络启动需要时间
+        int attempts = 0;
+        while (attempts < 10)
+        {
+            // 检查是房主还是加入者
+            if (NetworkServer.active)
+            {
+                // 房主：显示房间信息
+                Debug.Log($"检测到房主（尝试 {attempts + 1}），显示房间信息");
+                ShowHostUI();
+                yield break; // 退出协程
+            }
+            else if (NetworkClient.active)
+            {
+                // 已连接的客户端：显示房间信息
+                Debug.Log($"检测到客户端（尝试 {attempts + 1}），显示房间信息");
+                ShowJoinUI();
+                yield break; // 退出协程
+            }
+            
+            attempts++;
+            yield return new WaitForSeconds(0.2f);
+        }
+        
+        // 如果10次尝试后仍未连接，显示加入界面
+        Debug.Log("未检测到网络连接，显示加入界面");
+        ShowJoinUI();
+    }
+
+    [Header("房主UI面板")]
+    [SerializeField] private GameObject hostPanel; // 房主面板（包含IP、二维码、玩家列表等）
 
     private void ShowHostUI()
     {
+        // 显示房主面板
+        if (hostPanel != null)
+            hostPanel.SetActive(true);
+        
+        // 隐藏加入面板
         if (joinRoomPanel != null)
             joinRoomPanel.SetActive(false);
 
         if (roomIPText != null && networkManager != null)
         {
             string ip = networkManager.GetServerIP();
+            if (string.IsNullOrEmpty(ip))
+                ip = networkManager.GetLocalIP();
             roomIPText.text = $"房间IP: {ip}";
         }
 
@@ -74,18 +109,35 @@ public class RoomUI : MonoBehaviour
         if (qrCodeImage != null && networkManager != null)
         {
             string ip = networkManager.GetServerIP();
+            if (string.IsNullOrEmpty(ip))
+                ip = networkManager.GetLocalIP();
             GenerateQRCode(ip);
         }
     }
 
     private void ShowJoinUI()
     {
+        // 隐藏房主面板
+        if (hostPanel != null)
+            hostPanel.SetActive(false);
+        
+        // 显示加入面板
         if (joinRoomPanel != null)
             joinRoomPanel.SetActive(true);
+    }
+    
+    public string GetLocalIP()
+    {
+        if (networkManager != null)
+            return networkManager.GetServerIP();
+        return "127.0.0.1";
     }
 
     public void OnRoomCreated(string ip)
     {
+        Debug.Log($"房间已创建，IP: {ip}");
+        ShowHostUI();
+        
         if (roomIPText != null)
             roomIPText.text = $"房间IP: {ip}";
 

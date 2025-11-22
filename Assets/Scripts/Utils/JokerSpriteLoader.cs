@@ -16,11 +16,11 @@ public static class JokerSpriteLoader
     // - 每张小丑牌的大小
     // - 网格布局（行数和列数）
     
-    // 示例：假设是 3列 x 2行 的网格，每张小丑牌大小相同
-    // 需要根据实际图片调整这些值
-    private const int COLUMNS = 3; // 列数
-    private const int ROWS = 2;    // 行数
-    private const int TOTAL_JOKERS = 6; // 总共6种小丑牌
+    // 加载所有小丑牌图片，但6种类型只使用前6张
+    // 假设图片是网格布局，需要根据实际图片调整列数和行数
+    private const int COLUMNS = 10; // 列数（需要根据实际图片调整）
+    private const int ROWS = 16;    // 行数（需要根据实际图片调整）
+    private const int TOTAL_JOKERS = 160; // 总共160种小丑牌（COLUMNS * ROWS）
     
     /// <summary>
     /// 加载并切分小丑牌图片
@@ -41,19 +41,19 @@ public static class JokerSpriteLoader
         int jokerWidth = jokerTexture.width / COLUMNS;
         int jokerHeight = jokerTexture.height / ROWS;
         
+        // 加载所有小丑牌图片
         jokerSprites = new Sprite[TOTAL_JOKERS];
         
         // 小丑牌类型顺序（根据 GDD）：
-        // 0: Joker
-        // 1: GreedyJoker
-        // 2: LustyJoker
-        // 3: WrathfulJoker
-        // 4: GluttonousJoker
-        // 5: JollyJoker
+        // 0: Joker (对应图片第1张，索引0)
+        // 1: GreedyJoker (对应图片第2张，索引1)
+        // 2: LustyJoker (对应图片第3张，索引2)
+        // 3: WrathfulJoker (对应图片第4张，索引3)
+        // 4: GluttonousJoker (对应图片第5张，索引4)
+        // 5: JollyJoker (对应图片第6张，索引5)
+        // 之后的小丑牌类型会使用索引6及以后的图片
         
         // 假设从左到右、从上到下排列
-        // 第1行：0, 1, 2
-        // 第2行：3, 4, 5
         int index = 0;
         for (int row = 0; row < ROWS && index < TOTAL_JOKERS; row++)
         {
@@ -87,12 +87,12 @@ public static class JokerSpriteLoader
         if (jokerSprites == null)
             return null;
         
-        // 根据类型获取索引
-        int index = GetJokerIndex(type);
-        if (index >= 0 && index < jokerSprites.Length)
-            return jokerSprites[index];
+        // 根据类型获取索引（6种类型使用前6张图片）
+        int typeIndex = GetJokerIndex(type);
+        if (typeIndex >= 0 && typeIndex < jokerSprites.Length)
+            return jokerSprites[typeIndex];
             
-        Debug.LogWarning($"小丑牌索引超出范围: type={type}, index={index}");
+        Debug.LogWarning($"小丑牌索引超出范围: type={type}, index={typeIndex}, max={jokerSprites.Length - 1}");
         return null;
     }
     

@@ -29,6 +29,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button confirmButton;
     [SerializeField] private Transform avatarSelectionParent;
     [SerializeField] private GameObject avatarButtonPrefab;
+    [SerializeField] private Image avatarPreviewImage; // 头像预览
 
     private int selectedAvatarId = 0;
     private PlayerDataManager dataManager;
@@ -47,29 +48,40 @@ public class MainMenu : MonoBehaviour
             exitButton.onClick.AddListener(OnExitClicked);
         if (confirmButton != null)
             confirmButton.onClick.AddListener(OnConfirmPlayerInfo);
+        if (nameInputField != null)
+            nameInputField.onValueChanged.AddListener(OnNameInputChanged);
+
+        // 初始时禁用确认按钮
+        if (confirmButton != null)
+            confirmButton.interactable = false;
 
         // 检查玩家信息
         CheckPlayerInfo();
 
         // 初始化商店
-        if (shopUI != null)
-            shopUI.Initialize();
+        InitializeShop();
     }
 
     private void CheckPlayerInfo()
     {
         if (dataManager == null)
-            return;
+        {
+            // 如果找不到 PlayerDataManager，创建一个
+            GameObject managerObj = new GameObject("PlayerDataManager");
+            dataManager = managerObj.AddComponent<PlayerDataManager>();
+        }
 
         PlayerSaveData saveData = dataManager.LoadPlayerData();
         if (saveData == null || string.IsNullOrEmpty(saveData.playerName))
         {
             // 显示玩家信息输入窗口
+            Debug.Log("玩家信息为空，显示输入窗口");
             ShowPlayerInfoWindow();
         }
         else
         {
             // 加载玩家信息
+            Debug.Log($"加载玩家信息: {saveData.playerName}");
             LoadPlayerInfo(saveData);
         }
     }
@@ -77,7 +89,14 @@ public class MainMenu : MonoBehaviour
     private void ShowPlayerInfoWindow()
     {
         if (playerInfoWindow != null)
+        {
             playerInfoWindow.SetActive(true);
+            Debug.Log("玩家信息窗口已显示");
+        }
+        else
+        {
+            Debug.LogError("playerInfoWindow 引用未分配！请在 Inspector 中分配。");
+        }
 
         // 初始化头像选择
         if (avatarSelectionParent != null && avatarButtonPrefab != null)
@@ -88,13 +107,95 @@ public class MainMenu : MonoBehaviour
                 Destroy(child.gameObject);
             }
 
-            // 创建头像选择按钮（假设有多个头像）
-            for (int i = 0; i < 10; i++) // 假设有10个头像
+            // 确保有 Grid Layout Group
+            UnityEngine.UI.GridLayoutGroup gridLayout = avatarSelectionParent.GetComponent<UnityEngine.UI.GridLayoutGroup>();
+            if (gridLayout == null)
+            {
+                gridLayout = avatarSelectionParent.gameObject.AddComponent<UnityEngine.UI.GridLayoutGroup>();
+                gridLayout.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
+                gridLayout.constraintCount = 5; // 5列，可以根据需要调整
+                // 设置对齐方式：左上角对齐
+                gridLayout.childAlignment = TextAnchor.UpperLeft;
+                gridLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
+                gridLayout.startAxis = GridLayoutGroup.Axis.Horizontal;
+                Debug.Log("已自动添加 GridLayoutGroup 到 avatarSelectionParent");
+            }
+
+            // 设置 avatarSelectionParent 的 RectTransform（左上角对齐）
+            RectTransform rectTransform = avatarSelectionParent.GetComponent<RectTransform>();
+            if (rectTransform != null)
+            {
+                // 设置锚点为左上角
+                rectTransform.anchorMin = new Vector2(0, 1);
+                rectTransform.anchorMax = new Vector2(0, 1);
+                rectTransform.pivot = new Vector2(0, 1);
+                // 设置位置为 (0, 0) 相对于父对象
+                rectTransform.anchoredPosition = Vector2.zero;
+            }
+
+            // 确保父对象有 ScrollRect（用于滚动）
+            UnityEngine.UI.ScrollRect scrollRect = avatarSelectionParent.GetComponentInParent<UnityEngine.UI.ScrollRect>();
+            if (scrollRect == null)
+            {
+                // 如果没有 ScrollRect，尝试在 avatarSelectionParent 的父对象上添加
+                Transform parent = avatarSelectionParent.parent;
+                if (parent != null)
+                {
+                    scrollRect = parent.GetComponent<UnityEngine.UI.ScrollRect>();
+                    if (scrollRect == null)
+                    {
+                        // 自动添加 ScrollRect
+                        scrollRect = parent.gameObject.AddComponent<UnityEngine.UI.ScrollRect>();
+                        scrollRect.content = rectTransform;
+                        scrollRect.horizontal = false; // 垂直滚动
+                        scrollRect.vertical = true;
+                        scrollRect.movementType = UnityEngine.UI.ScrollRect.MovementType.Elastic;
+                        Debug.Log("已自动添加 ScrollRect 到 avatarSelectionParent 的父对象");
+                    }
+                }
+            }
+            else
+            {
+                // 确保 ScrollRect 的 content 指向 avatarSelectionParent
+                if (scrollRect.content != rectTransform)
+                {
+                    scrollRect.content = rectTransform;
+                }
+                scrollRect.horizontal = false;
+                scrollRect.vertical = true;
+            }
+
+            // 获取头像总数
+            int avatarCount = AvatarSpriteLoader.GetAvatarCount();
+            if (avatarCount == 0)
+                avatarCount = 10; // 默认10个
+
+            // 创建头像选择按钮
+            for (int i = 0; i < avatarCount; i++)
             {
                 GameObject buttonObj = Instantiate(avatarButtonPrefab, avatarSelectionParent);
                 Button button = buttonObj.GetComponent<Button>();
+                
+                // 设置头像按钮的图片
+                Image buttonImage = buttonObj.GetComponent<Image>();
+                if (buttonImage == null)
+                    buttonImage = buttonObj.GetComponentInChildren<Image>();
+                
+                if (buttonImage != null)
+                {
+                    Sprite avatarSprite = AvatarSpriteLoader.GetAvatarSprite(i);
+                    if (avatarSprite != null)
+                        buttonImage.sprite = avatarSprite;
+                }
+                
                 int avatarId = i;
                 button.onClick.AddListener(() => OnAvatarSelected(avatarId));
+            }
+            
+            // 默认选择第一个头像
+            if (avatarCount > 0)
+            {
+                OnAvatarSelected(0);
             }
         }
     }
@@ -102,14 +203,39 @@ public class MainMenu : MonoBehaviour
     private void OnAvatarSelected(int avatarId)
     {
         selectedAvatarId = avatarId;
-        // 可以在这里更新预览
+        Debug.Log($"选择头像: {avatarId}");
+        
+        // 更新预览
+        if (avatarPreviewImage != null)
+        {
+            Sprite avatarSprite = AvatarSpriteLoader.GetAvatarSprite(avatarId);
+            if (avatarSprite != null)
+            {
+                avatarPreviewImage.sprite = avatarSprite;
+                avatarPreviewImage.gameObject.SetActive(true);
+            }
+        }
+    }
+    
+    private void OnNameInputChanged(string value)
+    {
+        // 检查用户名是否为空，控制确认按钮状态
+        if (confirmButton != null)
+        {
+            confirmButton.interactable = !string.IsNullOrWhiteSpace(value);
+        }
     }
 
     private void OnConfirmPlayerInfo()
     {
-        string playerName = nameInputField != null ? nameInputField.text : "Player";
-        if (string.IsNullOrEmpty(playerName))
-            playerName = "Player";
+        string playerName = nameInputField != null ? nameInputField.text : "";
+        if (string.IsNullOrWhiteSpace(playerName))
+        {
+            Debug.LogWarning("请输入玩家名称！");
+            return;
+        }
+        
+        playerName = playerName.Trim();
 
         // 保存玩家信息
         if (dataManager != null)
@@ -160,18 +286,71 @@ public class MainMenu : MonoBehaviour
 
     private void OnCreateRoomClicked()
     {
-        if (NetworkManagerCustom.Instance != null)
+        Debug.Log("点击创建房间");
+        
+        // 先切换到房间场景
+        try
         {
-            NetworkManagerCustom.Instance.CreateRoom();
-            // 切换到房间场景
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameRoom");
+            // 使用 NetworkManagerCustom 来运行协程（因为它不会被销毁）
+            NetworkManagerCustom networkManager = NetworkManagerCustom.Instance;
+            if (networkManager == null)
+            {
+                networkManager = FindFirstObjectByType<NetworkManagerCustom>();
+            }
+            
+            if (networkManager != null)
+            {
+                // 让 NetworkManagerCustom 处理场景切换和创建房间
+                networkManager.StartCoroutine(networkManager.CreateRoomAfterSceneLoad());
+            }
+            else
+            {
+                Debug.LogError("找不到 NetworkManagerCustom！");
+            }
+            
+            UnityEngine.SceneManagement.SceneManager.LoadScene("CreateRoom");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"场景切换失败: {e.Message}。请确保 'CreateRoom' 场景已添加到 Build Settings！");
         }
     }
 
     private void OnJoinRoomClicked()
     {
+        Debug.Log("点击加入房间");
+        
         // 切换到房间场景（加入房间界面）
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameRoom");
+        try
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("JoinRoom");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"场景切换失败: {e.Message}。请确保 'GameRoom' 场景已添加到 Build Settings！");
+        }
+    }
+    
+
+    private void InitializeShop()
+    {
+        // 确保 ShopManager 存在
+        if (ShopManager.Instance == null)
+        {
+            GameObject shopManagerObj = new GameObject("ShopManager");
+            shopManagerObj.AddComponent<ShopManager>();
+        }
+        
+        // 如果商店为空，刷新商店
+        if (ShopManager.Instance != null && ShopManager.Instance.GetShopJokers().Count == 0)
+        {
+            ShopManager.Instance.RefreshShop();
+            Debug.Log("商店已刷新，生成10张小丑牌");
+        }
+        
+        // 初始化商店UI
+        if (shopUI != null)
+            shopUI.Initialize();
     }
 
     private void OnExitClicked()
@@ -201,4 +380,5 @@ public class MainMenu : MonoBehaviour
         }
     }
 }
+
 

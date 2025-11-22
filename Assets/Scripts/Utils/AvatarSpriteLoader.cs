@@ -18,9 +18,9 @@ public static class AvatarSpriteLoader
     // - 头像总数
     
     // 示例：假设是 5列 x 2行 的网格，共10个头像
-    private const int COLUMNS = 5; // 列数
-    private const int ROWS = 2;    // 行数
-    private const int TOTAL_AVATARS = 10; // 总共10个头像
+    private const int COLUMNS = 7; // 列数
+    private const int ROWS = 6;    // 行数
+    private const int TOTAL_AVATARS = 40; // 总共35个头像
     
     /// <summary>
     /// 加载并切分头像图片
