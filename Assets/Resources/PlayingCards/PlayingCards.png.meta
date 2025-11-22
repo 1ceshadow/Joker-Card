@@ -1,0 +1,2635 @@
+fileFormatVersion: 2
+guid: 35cc9bc32789be844b04e95253a4cea5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2865969986998129914
+    second: PlayingCards_0
+  - first:
+      213: -4454554717808523278
+    second: PlayingCards_1
+  - first:
+      213: 3617280734691106383
+    second: PlayingCards_2
+  - first:
+      213: 9026953408289087851
+    second: PlayingCards_3
+  - first:
+      213: -2654370119636619444
+    second: PlayingCards_4
+  - first:
+      213: -2371382668896991627
+    second: PlayingCards_5
+  - first:
+      213: 1637602353201522547
+    second: PlayingCards_6
+  - first:
+      213: 1746117681406380627
+    second: PlayingCards_7
+  - first:
+      213: 1291930242887823564
+    second: PlayingCards_8
+  - first:
+      213: 7627691406072880131
+    second: PlayingCards_9
+  - first:
+      213: 1385811635267949397
+    second: PlayingCards_10
+  - first:
+      213: 1784305901567140669
+    second: PlayingCards_11
+  - first:
+      213: -4449036838102563381
+    second: PlayingCards_12
+  - first:
+      213: 9188938279810362970
+    second: PlayingCards_13
+  - first:
+      213: 8094083956824879982
+    second: PlayingCards_14
+  - first:
+      213: 201178411213806671
+    second: PlayingCards_15
+  - first:
+      213: -8584261067022424817
+    second: PlayingCards_16
+  - first:
+      213: -9171909839999122137
+    second: PlayingCards_17
+  - first:
+      213: -7234283705007685550
+    second: PlayingCards_18
+  - first:
+      213: -6397484889173064850
+    second: PlayingCards_19
+  - first:
+      213: 3791418512038746279
+    second: PlayingCards_20
+  - first:
+      213: -2508680192800717999
+    second: PlayingCards_21
+  - first:
+      213: -6201576064187353191
+    second: PlayingCards_22
+  - first:
+      213: 4742708111030917614
+    second: PlayingCards_23
+  - first:
+      213: -8686500111833433192
+    second: PlayingCards_24
+  - first:
+      213: 8852380017749553356
+    second: PlayingCards_25
+  - first:
+      213: -8421643269222522256
+    second: PlayingCards_26
+  - first:
+      213: 426820350391027663
+    second: PlayingCards_27
+  - first:
+      213: 636205981597318846
+    second: PlayingCards_28
+  - first:
+      213: -8946253847342226676
+    second: PlayingCards_29
+  - first:
+      213: 1249778051477307798
+    second: PlayingCards_30
+  - first:
+      213: -1341781642978733380
+    second: PlayingCards_31
+  - first:
+      213: -4142252699238959887
+    second: PlayingCards_32
+  - first:
+      213: 9178767433172858043
+    second: PlayingCards_33
+  - first:
+      213: -1747945037723228219
+    second: PlayingCards_34
+  - first:
+      213: -20937716711057088
+    second: PlayingCards_35
+  - first:
+      213: 4582342386571512196
+    second: PlayingCards_36
+  - first:
+      213: 1309329813212824429
+    second: PlayingCards_37
+  - first:
+      213: 8261000583080687847
+    second: PlayingCards_38
+  - first:
+      213: 1691870843997200389
+    second: PlayingCards_39
+  - first:
+      213: 419001039022694946
+    second: PlayingCards_40
+  - first:
+      213: -836833133692955265
+    second: PlayingCards_41
+  - first:
+      213: 8905639582010076351
+    second: PlayingCards_42
+  - first:
+      213: -2409904663044281405
+    second: PlayingCards_43
+  - first:
+      213: -646531223379969817
+    second: PlayingCards_44
+  - first:
+      213: -3521071300731068477
+    second: PlayingCards_45
+  - first:
+      213: 8544784931415744081
+    second: PlayingCards_46
+  - first:
+      213: 2245462408017559452
+    second: PlayingCards_47
+  - first:
+      213: 8412027273088124228
+    second: PlayingCards_48
+  - first:
+      213: -5025842008913666542
+    second: PlayingCards_49
+  - first:
+      213: -733959534496234598
+    second: PlayingCards_50
+  - first:
+      213: -3057265028606227678
+    second: PlayingCards_51
+  - first:
+      213: -6210795986103262260
+    second: PlayingCards_52
+  - first:
+      213: 6418825276746724745
+    second: PlayingCards_53
+  - first:
+      213: -3596225168858849786
+    second: PlayingCards_54
+  - first:
+      213: 4762959160421999552
+    second: PlayingCards_55
+  - first:
+      213: -4470095611487896433
+    second: PlayingCards_56
+  - first:
+      213: 2769420373023013643
+    second: PlayingCards_57
+  - first:
+      213: -5474438738884251055
+    second: PlayingCards_58
+  - first:
+      213: 532270156198228759
+    second: PlayingCards_59
+  - first:
+      213: 1195726168934135558
+    second: PlayingCards_60
+  - first:
+      213: 5205224979372902827
+    second: PlayingCards_61
+  - first:
+      213: -2418962123653540724
+    second: PlayingCards_62
+  - first:
+      213: 133427005321362293
+    second: PlayingCards_63
+  - first:
+      213: 7011149869676948158
+    second: PlayingCards_64
+  - first:
+      213: 8116011032229312882
+    second: PlayingCards_65
+  - first:
+      213: -3162000166381271025
+    second: PlayingCards_66
+  - first:
+      213: -8331802761478816630
+    second: PlayingCards_67
+  - first:
+      213: 3764866138545667936
+    second: PlayingCards_68
+  - first:
+      213: 2851822073030905332
+    second: PlayingCards_69
+  - first:
+      213: -1198752450656030927
+    second: PlayingCards_70
+  - first:
+      213: 5073065591713535788
+    second: PlayingCards_71
+  - first:
+      213: 3555030755654175247
+    second: PlayingCards_72
+  - first:
+      213: -1053074228828908135
+    second: PlayingCards_73
+  - first:
+      213: 6295833658012930676
+    second: PlayingCards_74
+  - first:
+      213: -5073413575255119581
+    second: PlayingCards_75
+  - first:
+      213: 7046269136483742787
+    second: PlayingCards_76
+  - first:
+      213: 1853975455171681469
+    second: PlayingCards_77
+  - first:
+      213: 8197269449432879667
+    second: PlayingCards_78
+  - first:
+      213: 8819375486466171126
+    second: PlayingCards_79
+  - first:
+      213: -9013588240579126253
+    second: PlayingCards_80
+  - first:
+      213: 3440631200840887510
+    second: PlayingCards_81
+  - first:
+      213: 9203420747650755042
+    second: PlayingCards_82
+  - first:
+      213: 2881159861290045545
+    second: PlayingCards_83
+  - first:
+      213: 4915076748652976130
+    second: PlayingCards_84
+  - first:
+      213: -1577375966246845209
+    second: PlayingCards_85
+  - first:
+      213: -5661801043931128522
+    second: PlayingCards_86
+  - first:
+      213: 4877281030321786532
+    second: PlayingCards_87
+  - first:
+      213: -6860209737655294951
+    second: PlayingCards_88
+  - first:
+      213: 4916061084824475943
+    second: PlayingCards_89
+  - first:
+      213: -4735704320418076386
+    second: PlayingCards_90
+  - first:
+      213: -1389007771695932383
+    second: PlayingCards_91
+  - first:
+      213: -2350438964410164484
+    second: PlayingCards_92
+  - first:
+      213: 1495019126512068442
+    second: PlayingCards_93
+  - first:
+      213: -7173988380272736747
+    second: PlayingCards_94
+  - first:
+      213: 3596895642123335245
+    second: PlayingCards_95
+  - first:
+      213: -6496117562956761981
+    second: PlayingCards_96
+  - first:
+      213: 7456184309686129332
+    second: PlayingCards_97
+  - first:
+      213: 8077290271603379323
+    second: PlayingCards_98
+  - first:
+      213: 1493846938018617612
+    second: PlayingCards_99
+  - first:
+      213: -5543938678094563418
+    second: PlayingCards_100
+  - first:
+      213: 34966537089678252
+    second: PlayingCards_101
+  - first:
+      213: -4579124864866835900
+    second: PlayingCards_102
+  - first:
+      213: 2136601010976662772
+    second: PlayingCards_103
+  - first:
+      213: 3880365503660755812
+    second: PlayingCards_104
+  - first:
+      213: -2763887896475453893
+    second: PlayingCards_105
+  - first:
+      213: 8882624915982616990
+    second: PlayingCards_106
+  - first:
+      213: -8276815512982413905
+    second: PlayingCards_107
+  - first:
+      213: -1211965707692043999
+    second: PlayingCards_108
+  - first:
+      213: -5779772683023638968
+    second: PlayingCards_109
+  - first:
+      213: 1302812192132740793
+    second: PlayingCards_110
+  - first:
+      213: 6508358377359662606
+    second: PlayingCards_111
+  - first:
+      213: -3471298072150816526
+    second: PlayingCards_112
+  - first:
+      213: 616086977740572540
+    second: PlayingCards_113
+  - first:
+      213: -2183325734257890866
+    second: PlayingCards_114
+  - first:
+      213: -4010712699868149608
+    second: PlayingCards_115
+  - first:
+      213: 2175331877796398622
+    second: PlayingCards_116
+  - first:
+      213: -4455536526775440331
+    second: PlayingCards_117
+  - first:
+      213: -3352644694404887845
+    second: PlayingCards_118
+  - first:
+      213: -9188009110653238788
+    second: PlayingCards_119
+  - first:
+      213: 8607182455340173070
+    second: PlayingCards_120
+  - first:
+      213: 6906411902372216382
+    second: PlayingCards_121
+  - first:
+      213: -9128619729990242395
+    second: PlayingCards_122
+  - first:
+      213: 2403861345527172953
+    second: PlayingCards_123
+  - first:
+      213: -2944059869589919419
+    second: PlayingCards_124
+  - first:
+      213: -2536752484846657024
+    second: PlayingCards_125
+  - first:
+      213: 6727787063684492474
+    second: PlayingCards_126
+  - first:
+      213: -9185720154357992111
+    second: PlayingCards_127
+  - first:
+      213: -34563540331141409
+    second: PlayingCards_128
+  - first:
+      213: 8720400176091258799
+    second: PlayingCards_129
+  - first:
+      213: 1892501332340755671
+    second: PlayingCards_130
+  - first:
+      213: 3933028549377466172
+    second: PlayingCards_131
+  - first:
+      213: -4548578491573573288
+    second: PlayingCards_132
+  - first:
+      213: -2651058772814034905
+    second: PlayingCards_133
+  - first:
+      213: 7199073705255918567
+    second: PlayingCards_134
+  - first:
+      213: 3447042438787992736
+    second: PlayingCards_135
+  - first:
+      213: -4136193267544554351
+    second: PlayingCards_136
+  - first:
+      213: -8449264458120918185
+    second: PlayingCards_137
+  - first:
+      213: -6302141996740622578
+    second: PlayingCards_138
+  - first:
+      213: 3446366268135268656
+    second: PlayingCards_139
+  - first:
+      213: -5967172502887992660
+    second: PlayingCards_140
+  - first:
+      213: -41271478958604148
+    second: PlayingCards_141
+  - first:
+      213: 2675482771646553825
+    second: PlayingCards_142
+  - first:
+      213: -3641672561012640212
+    second: PlayingCards_143
+  - first:
+      213: 6601979902874179856
+    second: PlayingCards_144
+  - first:
+      213: -4718350433733003230
+    second: PlayingCards_145
+  - first:
+      213: -2031039838443346477
+    second: PlayingCards_146
+  - first:
+      213: -6733945906921454309
+    second: PlayingCards_147
+  - first:
+      213: 1175429097315817879
+    second: PlayingCards_148
+  - first:
+      213: 6337296789463009049
+    second: PlayingCards_149
+  - first:
+      213: -5477945556668447550
+    second: PlayingCards_150
+  - first:
+      213: 7190608218550971180
+    second: PlayingCards_151
+  - first:
+      213: -6292285048787705041
+    second: PlayingCards_152
+  - first:
+      213: 1307776217747021695
+    second: PlayingCards_153
+  - first:
+      213: 6727286829659629954
+    second: PlayingCards_154
+  - first:
+      213: -707656756608990422
+    second: PlayingCards_155
+  - first:
+      213: 8601965598952975041
+    second: PlayingCards_156
+  - first:
+      213: -237614328760048342
+    second: PlayingCards_157
+  - first:
+      213: -8521486643401660823
+    second: PlayingCards_158
+  - first:
+      213: 9015956120173197680
+    second: PlayingCards_159
+  - first:
+      213: 3561667662504911490
+    second: PlayingCards_160
+  - first:
+      213: 7500612552576171467
+    second: PlayingCards_161
+  - first:
+      213: -3692237747689078101
+    second: PlayingCards_162
+  - first:
+      213: 6127057886751217930
+    second: PlayingCards_163
+  - first:
+      213: 6525708464959204204
+    second: PlayingCards_164
+  - first:
+      213: -8591467994051641833
+    second: PlayingCards_165
+  - first:
+      213: 346431945126215300
+    second: PlayingCards_166
+  - first:
+      213: -4838767676569970894
+    second: PlayingCards_167
+  - first:
+      213: 3349589898977064947
+    second: PlayingCards_168
+  - first:
+      213: 6517979025412807165
+    second: PlayingCards_169
+  - first:
+      213: -6322338224274317001
+    second: PlayingCards_170
+  - first:
+      213: -2352334148341541561
+    second: PlayingCards_171
+  - first:
+      213: -9200758018127170239
+    second: PlayingCards_172
+  - first:
+      213: 7104656087295646437
+    second: PlayingCards_173
+  - first:
+      213: -7754189331441601708
+    second: PlayingCards_174
+  - first:
+      213: 8340804341562970706
+    second: PlayingCards_175
+  - first:
+      213: 8552396499736537285
+    second: PlayingCards_176
+  - first:
+      213: -1095950437303608532
+    second: PlayingCards_177
+  - first:
+      213: -1901960276048334177
+    second: PlayingCards_178
+  - first:
+      213: 3289493652947369258
+    second: PlayingCards_179
+  - first:
+      213: -6390089261211591611
+    second: PlayingCards_180
+  - first:
+      213: -5224872138657620315
+    second: PlayingCards_181
+  - first:
+      213: 6950162703173221582
+    second: PlayingCards_182
+  - first:
+      213: -5427111506012001310
+    second: PlayingCards_183
+  - first:
+      213: -6134752522887567704
+    second: PlayingCards_184
+  - first:
+      213: -6222241314524322671
+    second: PlayingCards_185
+  - first:
+      213: 7171629549201954501
+    second: PlayingCards_186
+  - first:
+      213: -6090280256528390327
+    second: PlayingCards_187
+  - first:
+      213: 7768226195068380627
+    second: PlayingCards_188
+  - first:
+      213: -8346949181754774432
+    second: PlayingCards_189
+  - first:
+      213: 5035992245420101919
+    second: PlayingCards_190
+  - first:
+      213: 2789828094128144454
+    second: PlayingCards_191
+  - first:
+      213: -692360180834899167
+    second: PlayingCards_192
+  - first:
+      213: 1017048645355073213
+    second: PlayingCards_193
+  - first:
+      213: -5467208831345273654
+    second: PlayingCards_194
+  - first:
+      213: -8349566404583862551
+    second: PlayingCards_195
+  - first:
+      213: 8769158237853694953
+    second: PlayingCards_196
+  - first:
+      213: 2588037911998987558
+    second: PlayingCards_197
+  - first:
+      213: 4039839897821029955
+    second: PlayingCards_198
+  - first:
+      213: -8674154077704650197
+    second: PlayingCards_199
+  - first:
+      213: 1642358377630546746
+    second: PlayingCards_200
+  - first:
+      213: 6881679594249920428
+    second: PlayingCards_201
+  - first:
+      213: -5163084053763167920
+    second: PlayingCards_202
+  - first:
+      213: -4890397051861754895
+    second: PlayingCards_203
+  - first:
+      213: 5657300153142585258
+    second: PlayingCards_204
+  - first:
+      213: 7000618579202904044
+    second: PlayingCards_205
+  - first:
+      213: 1845837266356698817
+    second: PlayingCards_206
+  - first:
+      213: 3160791510907933247
+    second: PlayingCards_207
+  - first:
+      213: 1200681549496258658
+    second: PlayingCards_208
+  - first:
+      213: 4166856413529306248
+    second: PlayingCards_209
+  - first:
+      213: -7904450187491223090
+    second: PlayingCards_210
+  - first:
+      213: 2872834126773977235
+    second: PlayingCards_211
+  - first:
+      213: -6138199000129903780
+    second: PlayingCards_212
+  - first:
+      213: 7771958237336076064
+    second: PlayingCards_213
+  - first:
+      213: -5860341321162465444
+    second: PlayingCards_214
+  - first:
+      213: 5065378656755131682
+    second: PlayingCards_215
+  - first:
+      213: -42185424620132544
+    second: PlayingCards_216
+  - first:
+      213: -4746002361301541818
+    second: PlayingCards_217
+  - first:
+      213: 5163114440945133245
+    second: PlayingCards_218
+  - first:
+      213: 3998701587311059429
+    second: PlayingCards_219
+  - first:
+      213: -422920138022396231
+    second: PlayingCards_220
+  - first:
+      213: -3241716825004330465
+    second: PlayingCards_221
+  - first:
+      213: -793849749861155318
+    second: PlayingCards_222
+  - first:
+      213: -1945479482384088560
+    second: PlayingCards_223
+  - first:
+      213: 695098807954596774
+    second: PlayingCards_224
+  - first:
+      213: -6491027139211161835
+    second: PlayingCards_225
+  - first:
+      213: 5190739326726957869
+    second: PlayingCards_226
+  - first:
+      213: 8575845035326960626
+    second: PlayingCards_227
+  - first:
+      213: 4267926346604967359
+    second: PlayingCards_228
+  - first:
+      213: -7409415933345195422
+    second: PlayingCards_229
+  - first:
+      213: -5054464969128470923
+    second: PlayingCards_230
+  - first:
+      213: 6272536364878638261
+    second: PlayingCards_231
+  - first:
+      213: -1882979303563400853
+    second: PlayingCards_232
+  - first:
+      213: 5062861164881650873
+    second: PlayingCards_233
+  - first:
+      213: 1187098176209771387
+    second: PlayingCards_234
+  - first:
+      213: 8967535389604205216
+    second: PlayingCards_235
+  - first:
+      213: 3297621070977755072
+    second: PlayingCards_236
+  - first:
+      213: 7924971709224724703
+    second: PlayingCards_237
+  - first:
+      213: 350902013523441790
+    second: PlayingCards_238
+  - first:
+      213: -201109303850804107
+    second: PlayingCards_239
+  - first:
+      213: 927321947490739993
+    second: PlayingCards_240
+  - first:
+      213: 1858217037564558024
+    second: PlayingCards_241
+  - first:
+      213: 3026989350150145396
+    second: PlayingCards_242
+  - first:
+      213: 6994596080141087379
+    second: PlayingCards_243
+  - first:
+      213: 8404033329243051649
+    second: PlayingCards_244
+  - first:
+      213: 5816381423798444115
+    second: PlayingCards_245
+  - first:
+      213: -8461516585230227014
+    second: PlayingCards_246
+  - first:
+      213: -4352960798698153753
+    second: PlayingCards_247
+  - first:
+      213: 2315163666655662963
+    second: PlayingCards_248
+  - first:
+      213: 4502615456837557503
+    second: PlayingCards_249
+  - first:
+      213: 4134661680622728319
+    second: PlayingCards_250
+  - first:
+      213: -228118660375028544
+    second: PlayingCards_251
+  - first:
+      213: 7840499291239783474
+    second: PlayingCards_252
+  - first:
+      213: -3915826829048541240
+    second: PlayingCards_253
+  - first:
+      213: -2546025560819127160
+    second: PlayingCards_254
+  - first:
+      213: 7483335009590858311
+    second: PlayingCards_255
+  - first:
+      213: 6384786678507595961
+    second: PlayingCards_256
+  - first:
+      213: 8986024615447850891
+    second: PlayingCards_257
+  - first:
+      213: -962994703388909486
+    second: PlayingCards_258
+  - first:
+      213: -5790013575284507449
+    second: PlayingCards_259
+  - first:
+      213: -2238807148153221917
+    second: PlayingCards_260
+  - first:
+      213: -847923105681817777
+    second: PlayingCards_261
+  - first:
+      213: -3420354223997169148
+    second: PlayingCards_262
+  - first:
+      213: -472365059348198871
+    second: PlayingCards_263
+  - first:
+      213: 3779437535970267400
+    second: PlayingCards_264
+  - first:
+      213: -9068530269716976189
+    second: PlayingCards_265
+  - first:
+      213: 3146144260061492671
+    second: PlayingCards_266
+  - first:
+      213: 8027466391328781944
+    second: PlayingCards_267
+  - first:
+      213: -488701009380610175
+    second: PlayingCards_268
+  - first:
+      213: -3080048731785931007
+    second: PlayingCards_269
+  - first:
+      213: -5118238965746789963
+    second: PlayingCards_270
+  - first:
+      213: -6239988435823275162
+    second: PlayingCards_271
+  - first:
+      213: -7109854951629101743
+    second: PlayingCards_272
+  - first:
+      213: -1997186000971357726
+    second: PlayingCards_273
+  - first:
+      213: -7025876974179690967
+    second: PlayingCards_274
+  - first:
+      213: -4461555238951969022
+    second: PlayingCards_275
+  - first:
+      213: 1035955650925759261
+    second: PlayingCards_276
+  - first:
+      213: 7539718119595560101
+    second: PlayingCards_277
+  - first:
+      213: 4529060341628276638
+    second: PlayingCards_278
+  - first:
+      213: -2493069705101111840
+    second: PlayingCards_279
+  - first:
+      213: 7914177931267257634
+    second: PlayingCards_280
+  - first:
+      213: -2184014058116451418
+    second: PlayingCards_281
+  - first:
+      213: 987451271313820118
+    second: PlayingCards_282
+  - first:
+      213: -6251421724966453328
+    second: PlayingCards_283
+  - first:
+      213: 8844389084881193457
+    second: PlayingCards_284
+  - first:
+      213: -2450038806854375212
+    second: PlayingCards_285
+  - first:
+      213: -3632411482084333429
+    second: PlayingCards_286
+  - first:
+      213: 5017079236983809602
+    second: PlayingCards_287
+  - first:
+      213: -6004556252670970927
+    second: PlayingCards_288
+  - first:
+      213: 2852395865815121295
+    second: PlayingCards_289
+  - first:
+      213: -611018496573203410
+    second: PlayingCards_290
+  - first:
+      213: -3730781914897214301
+    second: PlayingCards_291
+  - first:
+      213: -2186703226488104872
+    second: PlayingCards_292
+  - first:
+      213: -5099944244266278219
+    second: PlayingCards_293
+  - first:
+      213: -8395021050813830257
+    second: PlayingCards_294
+  - first:
+      213: 5941741375077645779
+    second: PlayingCards_295
+  - first:
+      213: 8765307031447652681
+    second: PlayingCards_296
+  - first:
+      213: 5596182399196518729
+    second: PlayingCards_297
+  - first:
+      213: -2365943057713456789
+    second: PlayingCards_298
+  - first:
+      213: 4635071593937259239
+    second: PlayingCards_299
+  - first:
+      213: -8448229837330272393
+    second: PlayingCards_300
+  - first:
+      213: -5771825004103259485
+    second: PlayingCards_301
+  - first:
+      213: 2239628634347402820
+    second: PlayingCards_302
+  - first:
+      213: -928209332284341375
+    second: PlayingCards_303
+  - first:
+      213: 4592998309869900232
+    second: PlayingCards_304
+  - first:
+      213: -6756071164636434558
+    second: PlayingCards_305
+  - first:
+      213: 3458971707179548174
+    second: PlayingCards_306
+  - first:
+      213: -4939825337625432957
+    second: PlayingCards_307
+  - first:
+      213: 1789068341059890556
+    second: PlayingCards_308
+  - first:
+      213: -3169166497818552626
+    second: PlayingCards_309
+  - first:
+      213: -4381560553645756055
+    second: PlayingCards_310
+  - first:
+      213: 2720785165237776319
+    second: PlayingCards_311
+  - first:
+      213: -3773640365050827711
+    second: PlayingCards_312
+  - first:
+      213: 2756452816374119974
+    second: PlayingCards_313
+  - first:
+      213: -1859042752337138677
+    second: PlayingCards_314
+  - first:
+      213: 4241780468079801853
+    second: PlayingCards_315
+  - first:
+      213: 4104049423166446973
+    second: PlayingCards_316
+  - first:
+      213: 4876601630523022596
+    second: PlayingCards_317
+  - first:
+      213: -2201457124458437295
+    second: PlayingCards_318
+  - first:
+      213: 6493804176857031511
+    second: PlayingCards_319
+  - first:
+      213: 8094074805752112166
+    second: PlayingCards_320
+  - first:
+      213: 6393691813609175045
+    second: PlayingCards_321
+  - first:
+      213: -6790593197937811804
+    second: PlayingCards_322
+  - first:
+      213: 3156365170641514165
+    second: PlayingCards_323
+  - first:
+      213: 6276475079735588991
+    second: PlayingCards_324
+  - first:
+      213: -5935582882256526411
+    second: PlayingCards_325
+  - first:
+      213: -8631729373980723679
+    second: PlayingCards_326
+  - first:
+      213: 853714002450775796
+    second: PlayingCards_327
+  - first:
+      213: 4595518023644519530
+    second: PlayingCards_328
+  - first:
+      213: -3906310176091530778
+    second: PlayingCards_329
+  - first:
+      213: -1366451763715245255
+    second: PlayingCards_330
+  - first:
+      213: -4516674478853588853
+    second: PlayingCards_331
+  - first:
+      213: 3461413051201319941
+    second: PlayingCards_332
+  - first:
+      213: 1268835974683270964
+    second: PlayingCards_333
+  - first:
+      213: 3587323322272182022
+    second: PlayingCards_334
+  - first:
+      213: -1065149012667770451
+    second: PlayingCards_335
+  - first:
+      213: -2095606562691443415
+    second: PlayingCards_336
+  - first:
+      213: 3538556049010867252
+    second: PlayingCards_337
+  - first:
+      213: -1692736410577453358
+    second: PlayingCards_338
+  - first:
+      213: -5381342578118910619
+    second: PlayingCards_339
+  - first:
+      213: -6548885934396171088
+    second: PlayingCards_340
+  - first:
+      213: -6597216150523384733
+    second: PlayingCards_341
+  - first:
+      213: -5874608170638391203
+    second: PlayingCards_342
+  - first:
+      213: -6372329230481165823
+    second: PlayingCards_343
+  - first:
+      213: 645756432735207494
+    second: PlayingCards_344
+  - first:
+      213: -1339753056036608437
+    second: PlayingCards_345
+  - first:
+      213: -7620698441665844575
+    second: PlayingCards_346
+  - first:
+      213: -1618863316576961377
+    second: PlayingCards_347
+  - first:
+      213: 6145753171790439233
+    second: PlayingCards_348
+  - first:
+      213: 4870643455361026733
+    second: PlayingCards_349
+  - first:
+      213: 3557228945506138675
+    second: PlayingCards_350
+  - first:
+      213: -945149842515793247
+    second: PlayingCards_351
+  - first:
+      213: -2820552103942026558
+    second: PlayingCards_352
+  - first:
+      213: 456830629210303597
+    second: PlayingCards_353
+  - first:
+      213: -4863360245580011204
+    second: PlayingCards_354
+  - first:
+      213: 8937588372982178503
+    second: PlayingCards_355
+  - first:
+      213: -4726801715650697680
+    second: PlayingCards_356
+  - first:
+      213: 4496602848139203752
+    second: PlayingCards_357
+  - first:
+      213: -1855852858905817609
+    second: PlayingCards_358
+  - first:
+      213: -714367385396404322
+    second: PlayingCards_359
+  - first:
+      213: 643140223216555071
+    second: PlayingCards_360
+  - first:
+      213: 6299548873626628951
+    second: PlayingCards_361
+  - first:
+      213: 7952624050046778993
+    second: PlayingCards_362
+  - first:
+      213: 3187263597711033528
+    second: PlayingCards_363
+  - first:
+      213: -1517277496910352449
+    second: PlayingCards_364
+  - first:
+      213: -117960233224705302
+    second: PlayingCards_365
+  - first:
+      213: -6891965040754642417
+    second: PlayingCards_366
+  - first:
+      213: 5212076927328370629
+    second: PlayingCards_367
+  - first:
+      213: -9208840223469147852
+    second: PlayingCards_368
+  - first:
+      213: -8533960353373505239
+    second: PlayingCards_369
+  - first:
+      213: -7358487566467863586
+    second: PlayingCards_370
+  - first:
+      213: -4850772782011600745
+    second: PlayingCards_371
+  - first:
+      213: -1372078843870961903
+    second: PlayingCards_372
+  - first:
+      213: -8389642319813937620
+    second: PlayingCards_373
+  - first:
+      213: 5141874907906934287
+    second: PlayingCards_374
+  - first:
+      213: -5116032136113951648
+    second: PlayingCards_375
+  - first:
+      213: -3690280471764294292
+    second: PlayingCards_376
+  - first:
+      213: -7558012437346552448
+    second: PlayingCards_377
+  - first:
+      213: -2815494499876841073
+    second: PlayingCards_378
+  - first:
+      213: 5538018517270704708
+    second: PlayingCards_379
+  - first:
+      213: -1281582688987952720
+    second: PlayingCards_380
+  - first:
+      213: 7716844388633884927
+    second: PlayingCards_381
+  - first:
+      213: -1515631149993308285
+    second: PlayingCards_382
+  - first:
+      213: 29671159913288972
+    second: PlayingCards_383
+  - first:
+      213: -1478491947598570612
+    second: PlayingCards_384
+  - first:
+      213: -721264828778268432
+    second: PlayingCards_385
+  - first:
+      213: 7149431808980287638
+    second: PlayingCards_386
+  - first:
+      213: 7363876946237667139
+    second: PlayingCards_387
+  - first:
+      213: -5696907447786245627
+    second: PlayingCards_388
+  - first:
+      213: 4075675984185553666
+    second: PlayingCards_389
+  - first:
+      213: 6746627267226779868
+    second: PlayingCards_390
+  - first:
+      213: -8948203745117827447
+    second: PlayingCards_391
+  - first:
+      213: 6344064864523477401
+    second: PlayingCards_392
+  - first:
+      213: 4439905515962738915
+    second: PlayingCards_393
+  - first:
+      213: 716026645610451697
+    second: PlayingCards_394
+  - first:
+      213: 2784549074389787674
+    second: PlayingCards_395
+  - first:
+      213: -6055477762262229825
+    second: PlayingCards_396
+  - first:
+      213: 3912736313465107007
+    second: PlayingCards_397
+  - first:
+      213: -8189873629831878663
+    second: PlayingCards_398
+  - first:
+      213: 4313375908046777216
+    second: PlayingCards_399
+  - first:
+      213: -3285597560510380576
+    second: PlayingCards_400
+  - first:
+      213: -8616634773976197591
+    second: PlayingCards_401
+  - first:
+      213: -1457098748530882394
+    second: PlayingCards_402
+  - first:
+      213: -1471486395096081563
+    second: PlayingCards_403
+  - first:
+      213: -5597990857887583049
+    second: PlayingCards_404
+  - first:
+      213: 9219336869794406557
+    second: PlayingCards_405
+  - first:
+      213: -529912783992947134
+    second: PlayingCards_406
+  - first:
+      213: -866071032885914751
+    second: PlayingCards_407
+  - first:
+      213: 4225092506687439598
+    second: PlayingCards_408
+  - first:
+      213: -7426320405244987299
+    second: PlayingCards_409
+  - first:
+      213: 620646917778619128
+    second: PlayingCards_410
+  - first:
+      213: -330031933769460385
+    second: PlayingCards_411
+  - first:
+      213: 8832880638702708423
+    second: PlayingCards_412
+  - first:
+      213: -1735384496624614214
+    second: PlayingCards_413
+  - first:
+      213: 2576800673386129592
+    second: PlayingCards_414
+  - first:
+      213: 8035505850980835189
+    second: PlayingCards_415
+  - first:
+      213: -9071368171919611263
+    second: PlayingCards_416
+  - first:
+      213: 2575093993678712016
+    second: PlayingCards_417
+  - first:
+      213: -1274530246410830772
+    second: PlayingCards_418
+  - first:
+      213: -5120631577234599337
+    second: PlayingCards_419
+  - first:
+      213: 5513726222401104997
+    second: PlayingCards_420
+  - first:
+      213: 6298565121926389509
+    second: PlayingCards_421
+  - first:
+      213: -4001331093703624885
+    second: PlayingCards_422
+  - first:
+      213: 4359014503430721376
+    second: PlayingCards_423
+  - first:
+      213: 5429179701441381453
+    second: PlayingCards_424
+  - first:
+      213: -6909788541173920659
+    second: PlayingCards_425
+  - first:
+      213: 3174066803714498231
+    second: PlayingCards_426
+  - first:
+      213: -2526689288574835357
+    second: PlayingCards_427
+  - first:
+      213: 3394992480032428989
+    second: PlayingCards_428
+  - first:
+      213: 3503623755757591316
+    second: PlayingCards_429
+  - first:
+      213: -2705870416288914847
+    second: PlayingCards_430
+  - first:
+      213: 8749013258007400665
+    second: PlayingCards_431
+  - first:
+      213: 7688477324313912676
+    second: PlayingCards_432
+  - first:
+      213: 1153407141588560857
+    second: PlayingCards_433
+  - first:
+      213: -5889842909557628983
+    second: PlayingCards_434
+  - first:
+      213: 1677808075165142434
+    second: PlayingCards_435
+  - first:
+      213: -1067189151498504935
+    second: PlayingCards_436
+  - first:
+      213: -930959846516567124
+    second: PlayingCards_437
+  - first:
+      213: 989847409389331529
+    second: PlayingCards_438
+  - first:
+      213: 4275589430768884246
+    second: PlayingCards_439
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayingCards_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60bab0c3b770a38d0800000000000000
+      internalID: -2865969986998129914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f78b7cd51e3e22c0800000000000000
+      internalID: -4454554717808523278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_2
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4e902cb9a9233230800000000000000
+      internalID: 3617280734691106383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b61a2194c4e264d70800000000000000
+      internalID: 9026953408289087851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_4
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4fe5ac8078c92bd0800000000000000
+      internalID: -2654370119636619444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_5
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57680e9d608271fd0800000000000000
+      internalID: -2371382668896991627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_6
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 377abe1f9aee9b610800000000000000
+      internalID: 1637602353201522547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_7
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35a8148a7c47b3810800000000000000
+      internalID: 1746117681406380627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_8
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc0b9e106bbdde110800000000000000
+      internalID: 1291930242887823564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_9
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30c164babe00bd960800000000000000
+      internalID: 7627691406072880131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_10
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 553dfb507546b3310800000000000000
+      internalID: 1385811635267949397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_11
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d33ea8983c023c810800000000000000
+      internalID: 1784305901567140669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_12
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 285
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc505485198d142c0800000000000000
+      internalID: -4449036838102563381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5ee51f2eaaa58f70800000000000000
+      internalID: 9188938279810362970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_14
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e633cb47976f35070800000000000000
+      internalID: 8094083956824879982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_15
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c50e8f2babac200800000000000000
+      internalID: 201178411213806671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_16
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f05a9e87a049ed880800000000000000
+      internalID: -8584261067022424817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_17
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72541fa6894d6b080800000000000000
+      internalID: -9171909839999122137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_18
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 250ce969c49aa9b90800000000000000
+      internalID: -7234283705007685550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_19
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6309ec73619737a0800000000000000
+      internalID: -6397484889173064850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_20
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a8d8e48c03dd9430800000000000000
+      internalID: 3791418512038746279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_21
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1530e0df7a06f2dd0800000000000000
+      internalID: -2508680192800717999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_22
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9973c8e4d639fe9a0800000000000000
+      internalID: -6201576064187353191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_23
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee99c5726eb71d140800000000000000
+      internalID: 4742708111030917614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_24
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89bf6ccdb2a537780800000000000000
+      internalID: -8686500111833433192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_25
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 190
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc07ab669b8f9da70800000000000000
+      internalID: 8852380017749553356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 072aee00110502b80800000000000000
+      internalID: -8421643269222522256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_27
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc707f7e8de5ce500800000000000000
+      internalID: 426820350391027663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_28
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebe361138f144d800800000000000000
+      internalID: 636205981597318846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_29
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c03e1be668588d380800000000000000
+      internalID: -8946253847342226676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_30
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6918266248a185110800000000000000
+      internalID: 1249778051477307798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_31
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb2dc1c64b8016de0800000000000000
+      internalID: -1341781642978733380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_32
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f475fbdd13c386c0800000000000000
+      internalID: -4142252699238959887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_33
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb4313a6958816f70800000000000000
+      internalID: 9178767433172858043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_34
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c7a99bcf3d0eb7e0800000000000000
+      internalID: -1747945037723228219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_35
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0499701f14d95bff0800000000000000
+      internalID: -20937716711057088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_36
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4898fce4f10c79f30800000000000000
+      internalID: 4582342386571512196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_37
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d63016a278cab2210800000000000000
+      internalID: 1309329813212824429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_38
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 95
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e8b1dbf248f4a270800000000000000
+      internalID: 8261000583080687847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5002b46919bba7710800000000000000
+      internalID: 1691870843997200389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_40
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 222a77b993790d500800000000000000
+      internalID: 419001039022694946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_41
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7554f9d2b8f264f0800000000000000
+      internalID: -836833133692955265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_42
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbc6e570400379b70800000000000000
+      internalID: 8905639582010076351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_43
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cb20b82a7c4e8ed0800000000000000
+      internalID: -2409904663044281405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_44
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e8fc3e174f0707f0800000000000000
+      internalID: -646531223379969817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_45
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cf1a13be44a22fc0800000000000000
+      internalID: -3521071300731068477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_46
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15e55277f9c259670800000000000000
+      internalID: 8544784931415744081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_47
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9f3162c92c792f10800000000000000
+      internalID: 2245462408017559452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_48
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 445c05d6c368db470800000000000000
+      internalID: 8412027273088124228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_49
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21e1779225f904ab0800000000000000
+      internalID: -5025842008913666542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_50
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9347da21b370d5f0800000000000000
+      internalID: -733959534496234598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayingCards_51
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 0
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22b83b197a96295d0800000000000000
+      internalID: -3057265028606227678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e26423eb0dcd368459d3eaf3fe860038
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":71.0,"y":95.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      PlayingCards_0: -2865969986998129914
+      PlayingCards_1: -4454554717808523278
+      PlayingCards_10: 1385811635267949397
+      PlayingCards_11: 1784305901567140669
+      PlayingCards_12: -4449036838102563381
+      PlayingCards_13: 9188938279810362970
+      PlayingCards_14: 8094083956824879982
+      PlayingCards_15: 201178411213806671
+      PlayingCards_16: -8584261067022424817
+      PlayingCards_17: -9171909839999122137
+      PlayingCards_18: -7234283705007685550
+      PlayingCards_19: -6397484889173064850
+      PlayingCards_2: 3617280734691106383
+      PlayingCards_20: 3791418512038746279
+      PlayingCards_21: -2508680192800717999
+      PlayingCards_22: -6201576064187353191
+      PlayingCards_23: 4742708111030917614
+      PlayingCards_24: -8686500111833433192
+      PlayingCards_25: 8852380017749553356
+      PlayingCards_26: -8421643269222522256
+      PlayingCards_27: 426820350391027663
+      PlayingCards_28: 636205981597318846
+      PlayingCards_29: -8946253847342226676
+      PlayingCards_3: 9026953408289087851
+      PlayingCards_30: 1249778051477307798
+      PlayingCards_31: -1341781642978733380
+      PlayingCards_32: -4142252699238959887
+      PlayingCards_33: 9178767433172858043
+      PlayingCards_34: -1747945037723228219
+      PlayingCards_35: -20937716711057088
+      PlayingCards_36: 4582342386571512196
+      PlayingCards_37: 1309329813212824429
+      PlayingCards_38: 8261000583080687847
+      PlayingCards_39: 1691870843997200389
+      PlayingCards_4: -2654370119636619444
+      PlayingCards_40: 419001039022694946
+      PlayingCards_41: -836833133692955265
+      PlayingCards_42: 8905639582010076351
+      PlayingCards_43: -2409904663044281405
+      PlayingCards_44: -646531223379969817
+      PlayingCards_45: -3521071300731068477
+      PlayingCards_46: 8544784931415744081
+      PlayingCards_47: 2245462408017559452
+      PlayingCards_48: 8412027273088124228
+      PlayingCards_49: -5025842008913666542
+      PlayingCards_5: -2371382668896991627
+      PlayingCards_50: -733959534496234598
+      PlayingCards_51: -3057265028606227678
+      PlayingCards_6: 1637602353201522547
+      PlayingCards_7: 1746117681406380627
+      PlayingCards_8: 1291930242887823564
+      PlayingCards_9: 7627691406072880131
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

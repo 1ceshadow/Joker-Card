@@ -1,0 +1,1157 @@
+fileFormatVersion: 2
+guid: ad9298bd69afa5748a143a70a9886cb1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4500778559983003615
+    second: Avatars_0
+  - first:
+      213: 603769829418907633
+    second: Avatars_1
+  - first:
+      213: -7787469832217531810
+    second: Avatars_2
+  - first:
+      213: -9158627825543105671
+    second: Avatars_3
+  - first:
+      213: 5096128501595719618
+    second: Avatars_4
+  - first:
+      213: 8403835057055089010
+    second: Avatars_5
+  - first:
+      213: 3827244392990545834
+    second: Avatars_6
+  - first:
+      213: 7512071704752182944
+    second: Avatars_7
+  - first:
+      213: -4165703984881079083
+    second: Avatars_8
+  - first:
+      213: -7525800268549114117
+    second: Avatars_9
+  - first:
+      213: 7848409410359912193
+    second: Avatars_10
+  - first:
+      213: 3977308672841332477
+    second: Avatars_11
+  - first:
+      213: 5859651457988946595
+    second: Avatars_12
+  - first:
+      213: 7033864852728948644
+    second: Avatars_13
+  - first:
+      213: -7433034999888399400
+    second: Avatars_14
+  - first:
+      213: -2231158408496535780
+    second: Avatars_15
+  - first:
+      213: 5319409710016436148
+    second: Avatars_16
+  - first:
+      213: 5830312118239129056
+    second: Avatars_17
+  - first:
+      213: -998549202776058567
+    second: Avatars_18
+  - first:
+      213: -6947467594269022312
+    second: Avatars_19
+  - first:
+      213: -149747072847648194
+    second: Avatars_20
+  - first:
+      213: 4945129039057862422
+    second: Avatars_21
+  - first:
+      213: -4052604487264127394
+    second: Avatars_22
+  - first:
+      213: -1232088150784090950
+    second: Avatars_23
+  - first:
+      213: -8739436207269375078
+    second: Avatars_24
+  - first:
+      213: 847783815782830318
+    second: Avatars_25
+  - first:
+      213: 4864207904147855774
+    second: Avatars_26
+  - first:
+      213: -7770794390969646535
+    second: Avatars_27
+  - first:
+      213: 2867213187482573023
+    second: Avatars_28
+  - first:
+      213: -2834110456075172204
+    second: Avatars_29
+  - first:
+      213: -6250071689513691532
+    second: Avatars_30
+  - first:
+      213: 3301728814290915798
+    second: Avatars_31
+  - first:
+      213: -6455779538530941233
+    second: Avatars_32
+  - first:
+      213: 1204186133178838866
+    second: Avatars_33
+  - first:
+      213: 6064964620107096885
+    second: Avatars_34
+  - first:
+      213: -6397635622258597572
+    second: Avatars_35
+  - first:
+      213: -4002095645056972513
+    second: Avatars_36
+  - first:
+      213: -9128646813236039780
+    second: Avatars_37
+  - first:
+      213: 4624564483435473703
+    second: Avatars_38
+  - first:
+      213: 648961656822848163
+    second: Avatars_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Avatars_0
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 2124
+        width: 311
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 128d48feeb50a81c0800000000000000
+      internalID: -4500778559983003615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_1
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 2124
+        width: 257
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f7bc900675016800800000000000000
+      internalID: 603769829418907633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_2
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 2124
+        width: 242
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5a6a9782795de390800000000000000
+      internalID: -7787469832217531810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_3
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 2124
+        width: 264
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 973be74648406e080800000000000000
+      internalID: -9158627825543105671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_4
+      rect:
+        serializedVersion: 2
+        x: 1482
+        y: 2124
+        width: 227
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c74b5b2fd519b640800000000000000
+      internalID: 5096128501595719618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_5
+      rect:
+        serializedVersion: 2
+        x: 1829
+        y: 2124
+        width: 239
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2714ebe757b60a470800000000000000
+      internalID: 8403835057055089010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_6
+      rect:
+        serializedVersion: 2
+        x: 2187
+        y: 2124
+        width: 226
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa79ec07f7a1d1530800000000000000
+      internalID: 3827244392990545834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_7
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 1704
+        width: 307
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a654013a6d304860800000000000000
+      internalID: 7512071704752182944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_8
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 1704
+        width: 293
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dcebbdeb427036c0800000000000000
+      internalID: -4165703984881079083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_9
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 1704
+        width: 239
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf63796778cfe8790800000000000000
+      internalID: -7525800268549114117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_10
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 1704
+        width: 239
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 107e55ca6c62bec60800000000000000
+      internalID: 7848409410359912193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_11
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 1704
+        width: 308
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df6b9ce4a2d323730800000000000000
+      internalID: 3977308672841332477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_12
+      rect:
+        serializedVersion: 2
+        x: 1794
+        y: 1704
+        width: 307
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aae70d84f9a15150800000000000000
+      internalID: 5859651457988946595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_13
+      rect:
+        serializedVersion: 2
+        x: 2172
+        y: 1704
+        width: 257
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a7a30901de4d9160800000000000000
+      internalID: 7033864852728948644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_14
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 1284
+        width: 253
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d33b9cac0e88d890800000000000000
+      internalID: -7433034999888399400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_15
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 1284
+        width: 226
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1720f7af355901e0800000000000000
+      internalID: -2231158408496535780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_16
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 1284
+        width: 247
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b71b44a2f652d940800000000000000
+      internalID: 5319409710016436148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_17
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1284
+        width: 309
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ed6c413bfd69e050800000000000000
+      internalID: 5830312118239129056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_18
+      rect:
+        serializedVersion: 2
+        x: 1451
+        y: 1284
+        width: 286
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93598c56ac07422f0800000000000000
+      internalID: -998549202776058567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_19
+      rect:
+        serializedVersion: 2
+        x: 1828
+        y: 1284
+        width: 238
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 897ae034803a59f90800000000000000
+      internalID: -6947467594269022312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_20
+      rect:
+        serializedVersion: 2
+        x: 2149
+        y: 1284
+        width: 304
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3ae2c4a4ddfbedf0800000000000000
+      internalID: -149747072847648194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_21
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 864
+        width: 237
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61f338d19a0a0a440800000000000000
+      internalID: 4945129039057862422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_22
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 864
+        width: 215
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e56b771c0b142c7c0800000000000000
+      internalID: -4052604487264127394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_23
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 864
+        width: 217
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abcdb80da5eb6eee0800000000000000
+      internalID: -1232088150784090950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_24
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 864
+        width: 243
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a939580b21947b680800000000000000
+      internalID: -8739436207269375078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_25
+      rect:
+        serializedVersion: 2
+        x: 1439
+        y: 864
+        width: 311
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee09f0283eee3cb00800000000000000
+      internalID: 847783815782830318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_26
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 864
+        width: 215
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9951603153218340800000000000000
+      internalID: 4864207904147855774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_27
+      rect:
+        serializedVersion: 2
+        x: 2193
+        y: 864
+        width: 216
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93208af3ca7982490800000000000000
+      internalID: -7770794390969646535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_28
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 444
+        width: 260
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd8d63fe3336ac720800000000000000
+      internalID: 2867213187482573023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_29
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 444
+        width: 237
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4964b635e873ba8d0800000000000000
+      internalID: -2834110456075172204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_30
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 444
+        width: 216
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4769fc5a9e84349a0800000000000000
+      internalID: -6250071689513691532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_31
+      rect:
+        serializedVersion: 2
+        x: 1123
+        y: 444
+        width: 237
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d15b700dd812dd20800000000000000
+      internalID: 3301728814290915798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_32
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 444
+        width: 237
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc6c0a1c6b67866a0800000000000000
+      internalID: -6455779538530941233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_33
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 444
+        width: 217
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25f639778e026b010800000000000000
+      internalID: 1204186133178838866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_34
+      rect:
+        serializedVersion: 2
+        x: 2194
+        y: 444
+        width: 216
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533abcc30351b2450800000000000000
+      internalID: 6064964620107096885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_35
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 24
+        width: 237
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3124e43c480737a0800000000000000
+      internalID: -6397635622258597572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_36
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 24
+        width: 266
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f19cd3ff633b578c0800000000000000
+      internalID: -4002095645056972513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_37
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 24
+        width: 285
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9f6019c618805180800000000000000
+      internalID: -9128646813236039780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_38
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 24
+        width: 217
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72b2f0c45e0cd2040800000000000000
+      internalID: 4624564483435473703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Avatars_39
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 24
+        width: 235
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa56c34033910900800000000000000
+      internalID: 648961656822848163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Avatars_0: -4500778559983003615
+      Avatars_1: 603769829418907633
+      Avatars_10: 7848409410359912193
+      Avatars_11: 3977308672841332477
+      Avatars_12: 5859651457988946595
+      Avatars_13: 7033864852728948644
+      Avatars_14: -7433034999888399400
+      Avatars_15: -2231158408496535780
+      Avatars_16: 5319409710016436148
+      Avatars_17: 5830312118239129056
+      Avatars_18: -998549202776058567
+      Avatars_19: -6947467594269022312
+      Avatars_2: -7787469832217531810
+      Avatars_20: -149747072847648194
+      Avatars_21: 4945129039057862422
+      Avatars_22: -4052604487264127394
+      Avatars_23: -1232088150784090950
+      Avatars_24: -8739436207269375078
+      Avatars_25: 847783815782830318
+      Avatars_26: 4864207904147855774
+      Avatars_27: -7770794390969646535
+      Avatars_28: 2867213187482573023
+      Avatars_29: -2834110456075172204
+      Avatars_3: -9158627825543105671
+      Avatars_30: -6250071689513691532
+      Avatars_31: 3301728814290915798
+      Avatars_32: -6455779538530941233
+      Avatars_33: 1204186133178838866
+      Avatars_34: 6064964620107096885
+      Avatars_35: -6397635622258597572
+      Avatars_36: -4002095645056972513
+      Avatars_37: -9128646813236039780
+      Avatars_38: 4624564483435473703
+      Avatars_39: 648961656822848163
+      Avatars_4: 5096128501595719618
+      Avatars_5: 8403835057055089010
+      Avatars_6: 3827244392990545834
+      Avatars_7: 7512071704752182944
+      Avatars_8: -4165703984881079083
+      Avatars_9: -7525800268549114117
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
