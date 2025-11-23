@@ -262,6 +262,7 @@ MainMenu
 - `avatarButtonPrefab` → Assets/Prefabs/AvatarButtonPrefab.prefab
 
 ### 场景2：GameRoom（房间场景）
+TODO待修改
 
 #### 1. 创建 Canvas（同上）
 

@@ -32,24 +32,25 @@ NetworkManagerCustom 需要 Transport 组件才能工作。有两种方式：
 1. File → Build Settings
 2. 添加场景：
    - MainMenu
-   - GameRoom
+   - CreateRoom
+   - JoinRoom
    - GameScene（游戏内场景）
 
 ### 4. 网络模式说明
 
 #### 游戏启动时
 - **不启动网络**：游戏启动时不会自动连接网络
-- 只有在点击"创建房间"或"加入房间"时才开始网络连接
+- 只有在点击"创建房间"或"加入房间界面的connect"时才开始网络连接
 
 #### 创建房间（房主）
-- 点击"创建房间" → 切换到 GameRoom 场景
+- 点击"创建房间" → 切换到 CreateRoom 场景
 - 自动调用 `StartHost()` → 启动服务器并连接
 - 该玩家成为服务器（Server + Client）
 
 #### 加入房间（客户端）
-- 点击"加入房间" → 切换到 GameRoom 场景
+- 点击"加入房间" → 切换到 JoinRoom 场景
 - 显示 IP 输入框
-- 输入房主 IP → 调用 `StartClient()` → 连接到服务器
+- 输入房主 IP，点击连接 → 调用 `StartClient()` → 连接到服务器，进入房主的房间界面(状态要和服务端同步)
 
 #### 离开房间
 - 调用 `StopHost()` 或 `StopClient()`
