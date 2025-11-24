@@ -22,11 +22,6 @@ public class RoomUI : MonoBehaviour
     [SerializeField] private Transform playerListParent;
     [SerializeField] private GameObject playerAvatarPrefab;
 
-    [Header("加入房间UI")]
-    [SerializeField] private GameObject joinRoomPanel;
-    [SerializeField] private TMP_InputField ipInputField;
-    [SerializeField] private Button connectButton;
-    [SerializeField] private Button scanQRButton;
 
     private NetworkManagerCustom networkManager;
     private List<GameObject> playerAvatarObjects = new List<GameObject>();
@@ -41,68 +36,20 @@ public class RoomUI : MonoBehaviour
             startGameButton.onClick.AddListener(OnStartGameClicked);
         if (leaveRoomButton != null)
             leaveRoomButton.onClick.AddListener(OnLeaveRoomClicked);
-        if (connectButton != null)
-            connectButton.onClick.AddListener(OnConnectClicked);
-        if (scanQRButton != null)
-            scanQRButton.onClick.AddListener(OnScanQRClicked);
-
-        // 延迟检查，等待网络状态稳定
-        StartCoroutine(CheckNetworkStatus());
-    }
-    
-    private System.Collections.IEnumerator CheckNetworkStatus()
-    {
-        // 等待更长时间，确保网络状态已初始化
-        yield return new WaitForSeconds(0.5f);
-        
-        // 多次检查，因为网络启动需要时间
-        int attempts = 0;
-        while (attempts < 10)
-        {
-            // 检查是房主还是加入者
-            if (NetworkServer.active)
-            {
-                // 房主：显示房间信息
-                Debug.Log($"检测到房主（尝试 {attempts + 1}），显示房间信息");
-                ShowHostUI();
-                yield break; // 退出协程
-            }
-            else if (NetworkClient.active)
-            {
-                // 已连接的客户端：显示房间信息
-                Debug.Log($"检测到客户端（尝试 {attempts + 1}），显示房间信息");
-                ShowJoinUI();
-                yield break; // 退出协程
-            }
-            
-            attempts++;
-            yield return new WaitForSeconds(0.2f);
-        }
-        
-        // 如果10次尝试后仍未连接，显示加入界面
-        Debug.Log("未检测到网络连接，显示加入界面");
-        ShowJoinUI();
-    }
-
-    [Header("房主UI面板")]
-    [SerializeField] private GameObject hostPanel; // 房主面板（包含IP、二维码、玩家列表等）
-
-    private void ShowHostUI()
-    {
-        // 显示房主面板
-        if (hostPanel != null)
-            hostPanel.SetActive(true);
-        
-        // 隐藏加入面板
-        if (joinRoomPanel != null)
-            joinRoomPanel.SetActive(false);
 
         if (roomIPText != null && networkManager != null)
         {
             string ip = networkManager.GetServerIP();
             if (string.IsNullOrEmpty(ip))
                 ip = networkManager.GetLocalIP();
-            roomIPText.text = $"房间IP: {ip}";
+            if (NetworkManagerCustom.Instance.isHost)
+            {
+                roomIPText.text = $"房间IP: {ip}";
+            }
+            else
+            {
+                roomIPText.text = $"已加入房间: {networkManager.networkAddress}";
+            }
         }
 
         // 生成二维码
@@ -113,31 +60,23 @@ public class RoomUI : MonoBehaviour
                 ip = networkManager.GetLocalIP();
             GenerateQRCode(ip);
         }
+
+        // 开始按钮根据玩家数启用
+        if (startGameButton != null)
+            startGameButton.interactable = networkManager.CanStartGame();
+
+        // 延迟检查，等待网络状态稳定
+        // 如果是房主检测服务器激活状态，显示HostUI
+
+            //StartCoroutine(CheckNetworkStatus());
     }
 
-    private void ShowJoinUI()
-    {
-        // 隐藏房主面板
-        if (hostPanel != null)
-            hostPanel.SetActive(false);
-        
-        // 显示加入面板
-        if (joinRoomPanel != null)
-            joinRoomPanel.SetActive(true);
-    }
-    
-    public string GetLocalIP()
-    {
-        if (networkManager != null)
-            return networkManager.GetServerIP();
-        return "127.0.0.1";
-    }
 
     public void OnRoomCreated(string ip)
     {
         Debug.Log($"房间已创建，IP: {ip}");
-        ShowHostUI();
-        
+        //ShowHostUI();
+
         if (roomIPText != null)
             roomIPText.text = $"房间IP: {ip}";
 
@@ -170,7 +109,7 @@ public class RoomUI : MonoBehaviour
         }
 
         // 更新开始游戏按钮状态
-        if (startGameButton != null && networkManager != null)
+        if (startGameButton != null && networkManager != null) // && NetworkServer.active
         {
             startGameButton.interactable = networkManager.CanStartGame();
         }
@@ -195,20 +134,6 @@ public class RoomUI : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
-    private void OnConnectClicked()
-    {
-        string ip = ipInputField != null ? ipInputField.text : "";
-        if (!string.IsNullOrEmpty(ip) && networkManager != null)
-        {
-            networkManager.JoinRoom(ip);
-        }
-    }
-
-    private void OnScanQRClicked()
-    {
-        // 打开二维码扫描（需要实现）
-        // QRCodeScanner.Instance?.StartScan();
-    }
 
     private void GenerateQRCode(string text)
     {
@@ -224,10 +149,5 @@ public class RoomUI : MonoBehaviour
         }
     }
 
-    public void OnDisconnected()
-    {
-        // 显示断开连接提示
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
-    }
 }
 

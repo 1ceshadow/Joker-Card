@@ -49,11 +49,13 @@ public class ShopUI : MonoBehaviour
             gridLayout = shopJokersParent.gameObject.AddComponent<UnityEngine.UI.GridLayoutGroup>();
             gridLayout.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
             gridLayout.constraintCount = 5; // 5列
-            // 设置对齐方式：左上角对齐
             gridLayout.childAlignment = TextAnchor.UpperLeft;
             gridLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
             gridLayout.startAxis = GridLayoutGroup.Axis.Horizontal;
-            Debug.Log("已自动添加 GridLayoutGroup 到 shopJokersParent");
+            // 设置单元格大小和间距
+            gridLayout.cellSize = new Vector2(150, 150); // 每个卡牌 150x150
+            gridLayout.spacing = new Vector2(10, 10); // 间距 10px
+            Debug.Log("已自动添加并配置 GridLayoutGroup 到 shopJokersParent");
         }
         
         // 确保 shopJokersParent 的 RectTransform 设置正确
@@ -62,8 +64,20 @@ public class ShopUI : MonoBehaviour
         {
             // 设置锚点为左上角
             rectTransform.anchorMin = new Vector2(0, 1);
-            rectTransform.anchorMax = new Vector2(0, 1);
+            rectTransform.anchorMax = new Vector2(1, 1); // 横向拉伸（配合 GridLayoutGroup）
             rectTransform.pivot = new Vector2(0, 1);
+            // 设置一个合理的高度（GridLayoutGroup 会根据内容自动调整）
+            rectTransform.anchoredPosition = Vector2.zero;
+            rectTransform.sizeDelta = new Vector2(0, 350); // 高度固定为 350（5 行 × 70 高 + 间距）
+        }
+
+        // 确保有 ContentSizeFitter，让高度自动调整
+        UnityEngine.UI.ContentSizeFitter sizeFitter = shopJokersParent.GetComponent<UnityEngine.UI.ContentSizeFitter>();
+        if (sizeFitter == null)
+        {
+            sizeFitter = shopJokersParent.gameObject.AddComponent<UnityEngine.UI.ContentSizeFitter>();
+            sizeFitter.verticalFit = UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
+            Debug.Log("已添加 ContentSizeFitter 到 shopJokersParent");
         }
 
         // 获取商店小丑牌
@@ -81,6 +95,13 @@ public class ShopUI : MonoBehaviour
                     continue;
                 }
                 
+                // 设置卡牌的 RectTransform（确保有正确的大小）
+                RectTransform jokerRect = jokerObj.GetComponent<RectTransform>();
+                if (jokerRect != null)
+                {
+                    jokerRect.sizeDelta = new Vector2(140, 140); // 稍微小于 cellSize 以留出间距
+                }
+                
                 JokerItemUI jokerUI = jokerObj.GetComponent<JokerItemUI>();
                 if (jokerUI != null)
                 {
@@ -96,6 +117,10 @@ public class ShopUI : MonoBehaviour
             }
             
             Debug.Log($"商店小丑牌 UI 创建完成，共 {shopJokerObjects.Count} 个");
+            
+            // 强制刷新布局
+            Canvas.ForceUpdateCanvases();
+            UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
         }
         else
         {

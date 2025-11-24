@@ -18,8 +18,8 @@ public static class JokerSpriteLoader
     
     // 加载所有小丑牌图片，但6种类型只使用前6张
     // 假设图片是网格布局，需要根据实际图片调整列数和行数
-    private const int COLUMNS = 10; // 列数（需要根据实际图片调整）
-    private const int ROWS = 16;    // 行数（需要根据实际图片调整）
+    private const int COLUMNS = 10; // 列数
+    private const int ROWS = 16;    // 行数
     private const int TOTAL_JOKERS = 160; // 总共160种小丑牌（COLUMNS * ROWS）
     
     /// <summary>

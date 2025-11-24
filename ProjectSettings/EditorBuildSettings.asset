@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 688f834597a0b7e4498b5c7478149f33
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: 0d650a487fdd9d04ab62d1f9395d4589
-  - enabled: 1
     path: Assets/Scenes/CreateRoom.unity
     guid: 06c3e7df7594cb2468803d6e067a0113
   - enabled: 1
     path: Assets/Scenes/JoinRoom.unity
-    guid: 31f92020657e0604fb6ef03d70853a1d
+    guid: 576ab637b061df645983ec1ff0900532
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 0d650a487fdd9d04ab62d1f9395d4589
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

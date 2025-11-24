@@ -67,8 +67,8 @@ public class GameManager : NetworkBehaviour
         if (gameStarted)
             return;
 
-        // 获取所有玩家
-        players = NetworkManagerCustom.Instance.roomPlayers;
+        // 获取所有玩家（通过 NetworkManagerCustom 的 RoomState SyncList 映射 netId -> PlayerData）
+        players = NetworkManagerCustom.Instance.GetRoomPlayers();
         if (players.Count < 2)
             return;
 
@@ -394,6 +394,8 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcOnGameStarted(uint[] playerNetIds)
     {
+        if (gameUI == null)
+            gameUI = FindFirstObjectByType<GameUI>();
         if (gameUI != null)
             gameUI.OnGameStarted();
     }
@@ -401,6 +403,8 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcOnPlayerTurnStarted(uint playerNetId, bool mustPlay)
     {
+        if (gameUI == null)
+            gameUI = FindFirstObjectByType<GameUI>();
         if (gameUI != null)
             gameUI.OnPlayerTurnStarted(playerNetId, mustPlay);
     }
@@ -408,6 +412,8 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcOnPlayerPlayedCards(uint playerNetId, Card[] cards, int score)
     {
+        if (gameUI == null)
+            gameUI = FindFirstObjectByType<GameUI>();
         if (gameUI != null)
             gameUI.OnPlayerPlayedCards(playerNetId, cards.ToList(), score);
     }
@@ -416,6 +422,8 @@ public class GameManager : NetworkBehaviour
     private void RpcOnPlayerBet(uint playerNetId, int amount, int newPot)
     {
         pot = newPot;
+        if (gameUI == null)
+            gameUI = FindFirstObjectByType<GameUI>();
         if (gameUI != null)
             gameUI.OnPlayerBet(playerNetId, amount, newPot);
     }
@@ -423,6 +431,8 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcOnPlayerDiscarded(uint playerNetId, int discardCount)
     {
+        if (gameUI == null)
+            gameUI = FindFirstObjectByType<GameUI>();
         if (gameUI != null)
             gameUI.OnPlayerDiscarded(playerNetId, discardCount);
     }
@@ -430,6 +440,8 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcOnGameEnded(uint[] winnerNetIds, int[] scores, int finalPot)
     {
+        if (gameUI == null)
+            gameUI = FindFirstObjectByType<GameUI>();
         if (gameUI != null)
             gameUI.OnGameEnded(winnerNetIds, scores, finalPot);
     }

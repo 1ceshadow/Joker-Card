@@ -121,16 +121,18 @@ public class MainMenu : MonoBehaviour
                 Debug.Log("已自动添加 GridLayoutGroup 到 avatarSelectionParent");
             }
 
-            // 设置 avatarSelectionParent 的 RectTransform（左上角对齐）
+            // 设置 avatarSelectionParent 的 RectTransform（横向拉伸并顶端对齐）
             RectTransform rectTransform = avatarSelectionParent.GetComponent<RectTransform>();
             if (rectTransform != null)
             {
-                // 设置锚点为左上角
+                // 拉伸内容以匹配 ScrollRect 的宽度并从上方开始布局，便于 GridLayoutGroup 正常计算列宽
                 rectTransform.anchorMin = new Vector2(0, 1);
-                rectTransform.anchorMax = new Vector2(0, 1);
-                rectTransform.pivot = new Vector2(0, 1);
-                // 设置位置为 (0, 0) 相对于父对象
+                rectTransform.anchorMax = new Vector2(1, 1); // 横向拉伸到父对象宽度
+                rectTransform.pivot = new Vector2(0.5f, 1f);
+                // 将位置重置为 (0,0)
                 rectTransform.anchoredPosition = Vector2.zero;
+                // 保持当前高度（sizeDelta.y），将宽度置0以使用拉伸尺寸
+                rectTransform.sizeDelta = new Vector2(0, rectTransform.sizeDelta.y);
             }
 
             // 确保父对象有 ScrollRect（用于滚动）
@@ -196,6 +198,21 @@ public class MainMenu : MonoBehaviour
             if (avatarCount > 0)
             {
                 OnAvatarSelected(0);
+            }
+            
+            // 强制刷新布局，确保 GridLayoutGroup/ContentSize 等生效，修复 ScrollRect 未更新导致的滚动问题
+            Canvas.ForceUpdateCanvases();
+            if (rectTransform != null)
+            {
+                UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+            }
+
+            // 如果存在 ScrollRect，重置滚动位置到顶部并清除速度
+            UnityEngine.UI.ScrollRect parentScroll = avatarSelectionParent.GetComponentInParent<UnityEngine.UI.ScrollRect>();
+            if (parentScroll != null)
+            {
+                parentScroll.verticalNormalizedPosition = 1f; // 顶部
+                parentScroll.velocity = Vector2.zero;
             }
         }
     }
@@ -291,6 +308,7 @@ public class MainMenu : MonoBehaviour
         // 先切换到房间场景
         try
         {
+            NetworkManagerCustom.Instance.isHost = true;
             // 使用 NetworkManagerCustom 来运行协程（因为它不会被销毁）
             NetworkManagerCustom networkManager = NetworkManagerCustom.Instance;
             if (networkManager == null)
@@ -312,6 +330,7 @@ public class MainMenu : MonoBehaviour
         }
         catch (System.Exception e)
         {
+            NetworkManagerCustom.Instance.isHost = false;
             Debug.LogError($"场景切换失败: {e.Message}。请确保 'CreateRoom' 场景已添加到 Build Settings！");
         }
     }
@@ -323,6 +342,7 @@ public class MainMenu : MonoBehaviour
         // 切换到房间场景（加入房间界面）
         try
         {
+            NetworkManagerCustom.Instance.isHost = false;
             UnityEngine.SceneManagement.SceneManager.LoadScene("JoinRoom");
         }
         catch (System.Exception e)

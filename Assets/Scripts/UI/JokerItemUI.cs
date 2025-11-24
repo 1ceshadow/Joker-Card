@@ -48,24 +48,47 @@ public class JokerItemUI : MonoBehaviour
     private void UpdateDisplay()
     {
         if (jokerData == null)
+        {
+            Debug.LogWarning("JokerItemUI: jokerData 为 null，无法更新显示");
             return;
+        }
 
         if (nameText != null)
             nameText.text = jokerData.name;
+        else
+            Debug.LogWarning("JokerItemUI: nameText 未分配");
 
         if (descriptionText != null)
             descriptionText.text = jokerData.GetDescription();
+        else
+            Debug.LogWarning("JokerItemUI: descriptionText 未分配");
 
         if (isShopItem)
         {
             if (priceText != null)
                 priceText.text = $"价格: {jokerData.shopPrice}";
+            else
+                Debug.LogWarning("JokerItemUI: priceText 未分配");
 
             if (actionButton != null)
             {
-                actionButton.GetComponentInChildren<TextMeshProUGUI>().text = "购买";
+                // 安全地获取按钮文本组件，避免 null 异常
+                TextMeshProUGUI buttonText = actionButton.GetComponentInChildren<TextMeshProUGUI>();
+                if (buttonText != null)
+                {
+                    buttonText.text = "购买";
+                }
+                else
+                {
+                    Debug.LogWarning("JokerItemUI: actionButton 没有包含 TextMeshProUGUI 组件的子对象");
+                }
+
                 actionButton.onClick.RemoveAllListeners();
                 actionButton.onClick.AddListener(OnBuyClicked);
+            }
+            else
+            {
+                Debug.LogWarning("JokerItemUI: actionButton 未分配");
             }
 
             if (sellButton != null)
@@ -103,6 +126,10 @@ public class JokerItemUI : MonoBehaviour
                 jokerImage.sprite = jokerSprite;
             else
                 Debug.LogWarning($"小丑牌图片未找到: {jokerData.type}");
+        }
+        else
+        {
+            Debug.LogWarning("JokerItemUI: jokerImage 未分配");
         }
     }
 

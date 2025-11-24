@@ -40,6 +40,7 @@
   <Project Path="Unity.Burst.CodeGen.csproj" />
   <Project Path="Unity.VisualScripting.Flow.csproj" />
   <Project Path="kcp2k.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.PerformanceTesting.csproj" />
   <Project Path="Unity.2D.Tilemap.Extras.Editor.csproj" />
   <Project Path="Unity.TextMeshPro.csproj" />
@@ -61,7 +62,6 @@
   <Project Path="Mirror.Authenticators.csproj" />
   <Project Path="Unity.2D.Sprite.Editor.csproj" />
   <Project Path="Mirror.Transports.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="EncryptionTransportEditor.csproj" />
   <Project Path="Unity.Multiplayer.Center.Common.csproj" />
   <Project Path="Unity.InputSystem.ForUI.csproj" />
