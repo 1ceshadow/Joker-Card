@@ -223,7 +223,7 @@ MainMenu
 └── RightPanel
     ├── ShopUI (空对象，添加 ShopUI 组件)
     │   ├── ShopJokersParent (空对象，用于放置商店小丑牌)
-    │   └── PlayerJokersParent (空对象，用于放置玩家小丑牌)
+    ├── PlayerJokersParent (空对象，用于放置玩家小丑牌)
     └── ShopTitle (TextMeshPro - Text (UI))
 ```
 

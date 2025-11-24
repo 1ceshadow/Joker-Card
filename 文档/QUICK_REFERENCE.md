@@ -1,5 +1,60 @@
 # 快速参考文档
 
+## 联机流程速查
+
+### 房主操作流程
+```
+MainMenu → 点击"创建房间"
+    ↓
+CreateRoom 场景加载
+    ↓
+StartHost() 启动服务器
+    ↓
+RoomUI 显示房间 IP（如：192.168.1.100）
+    ↓
+等待客户端加入...
+    ↓
+玩家加入后自动显示在列表中
+    ↓
+玩家数 >= 2 时，点击"开始游戏"进入 GameScene
+```
+
+### 客户端操作流程
+```
+MainMenu → 点击"加入房间"
+    ↓
+JoinRoom 场景加载（输入 IP 界面）
+    ↓
+输入房主 IP（如：192.168.1.100）
+    ↓
+点击"连接"按钮
+    ↓
+StartClient() 连接到房主
+    ↓
+自动加载 CreateRoom 场景
+    ↓
+RoomUI 显示房主的房间信息和玩家列表
+    ↓
+等待房主点击"开始游戏"
+    ↓
+进入 GameScene，开始游戏
+```
+
+## 关键代码调用链
+
+### 房主加入流程
+1. `MainMenu.OnCreateRoomClicked()` → 加载 CreateRoom 场景
+2. `CreateRoomAfterSceneLoad()` → 启动 Host
+3. `OnServerAddPlayer()` → 玩家加入时更新 RoomState
+4. `UpdateRoomUI()` → 服务器更新房主端 UI
+
+### 客户端加入流程
+1. `JoinRoomUI.OnConnectClicked()` → 调用 `JoinRoomAfterSceneLoad(ip)`
+2. `JoinRoomAfterSceneLoad()` → 启动 Client，加载 CreateRoom 场景
+3. `OnClientConnect()` → 连接成功后启动 `UpdateRoomUIClientAfterConnect()` 协程
+4. 协程等待 RoomUI 和玩家对象加载完成
+5. `RoomUI.UpdatePlayerList()` → 客户端显示玩家列表
+
 ## 核心参数（来自 GDD）
 
 - **开始底金**: 5

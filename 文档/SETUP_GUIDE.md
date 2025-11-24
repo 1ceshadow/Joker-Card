@@ -73,31 +73,34 @@
    - ShopUI 引用
    - 玩家信息输入窗口（包含输入框、确认按钮、头像选择区域）
 
-### GameRoom 场景
-TODO 待修改
+### CreateRoom 场景（房主和客户端都使用）
 1. 创建 Canvas
-2. 添加 `RoomUI` 组件
+2. 添加 `RoomUI` 组件到 Canvas 或空对象
 3. 配置 RoomUI 的所有引用：
-   - 房间IP文本
-   - 二维码图片
+   - 房间 IP 文本（显示房主 IP）
+   - 二维码图片（房主创建房间时显示）
    - 开始游戏按钮
    - 离开房间按钮
-   - 玩家列表父对象
-   - 加入房间面板（IP输入框、连接按钮、扫描按钮）
+   - 玩家列表父对象（显示房间内的所有玩家）
+   - PlayerAvatarInRoom Prefab 引用（玩家头像预制体）
 
-### GameScene 场景（游戏内场景）
+**特别说明**：
+- 房主（Server + Client）：启动 Host 后进入此场景，显示房间 IP 和二维码
+- 客户端（Client only）：连接到房主后自动加载此场景，显示房主的房间信息和玩家列表
+- 两边都使用同一个 RoomUI 脚本和场景，确保界面同步
+
+### JoinRoom 场景（仅客户端使用）
 1. 创建 Canvas
-2. 添加 `GameUI` 组件
-3. 配置 GameUI 的所有引用：
-   - 玩家信息区域
-   - 手牌区域
-   - 小丑牌区域
-   - 其他玩家区域
-   - 中心出的牌区域
-   - 三个操作按钮（出牌、押注、弃牌）
-   - 底池文本
-   - 结算面板引用
-4. 添加 `GameManager` 组件到空对象（必须添加 NetworkIdentity）
+2. 添加 `JoinRoomUI` 组件到 Canvas 或空对象
+3. 配置 JoinRoomUI 的所有引用：
+   - IP 输入框（TMP_InputField）
+   - 连接按钮（Button）
+   - 扫描 QR 码按钮（Button，可选）
+   - 离开房间按钮（Button）
+
+**说明**：
+- 仅用于客户端输入房主 IP
+- 点击连接后，自动加载 CreateRoom 场景与房主同步
 5. 添加 `BettingUI` 组件（押注窗口）
 6. 添加 `ResultUI` 组件（结算面板）
 
