@@ -168,3 +168,10 @@ StartHost() 启动服务器   输入房主 IP 地址
 - 使用 [SyncVar] 自动同步到所有客户端
 - 客户端通过 playerData.OnDataChanged 事件响应变化
 
+## 商店刷新与存档说明
+
+- **商店刷新**：本项目为局域网游戏，商店由本地客户端维护；当一局结束并返回主菜单时，本地商店会随机刷新（10 张小丑牌）。退出房间后没有持久化的服务器状态，因此商店不会由远端服务器持久保存或跨会话同步。
+- **购买行为**：玩家在本局中购买小丑牌后，当前局不会补货；下次刷新在返回主菜单后执行。
+- **本地存档（JSON）**：玩家数据保存在 `Application.persistentDataPath/players/<playerId>.json`，推荐字段：`playerName`, `avatarId`, `currentMoney`, `debt`, `jokersList`, `borrowedAmount`。
+
+

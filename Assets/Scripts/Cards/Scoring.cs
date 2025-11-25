@@ -62,17 +62,33 @@ public static class Scoring
         // 3. 计算基础mult = 牌型mult
         int totalMult = baseMult;
 
-        // 4. 应用小丑牌加成
+        // 4. 应用小丑牌加成（遵循已确认规则：先累加所有 chips 加成，再累加所有 mult 加成；触发顺序从左到右）
         if (jokers != null && jokers.Count > 0)
         {
+            // 先按顺序收集每张小丑牌的加成（保证从左到右触发）
+            var jokerBonuses = new List<(int chipsBonus, int multBonus)>();
             foreach (JokerData joker in jokers)
             {
                 if (joker != null)
                 {
-                    var (chipsBonus, multBonus) = joker.CalculateBonus(cards);
-                    totalChips += chipsBonus;
-                    totalMult += multBonus;
+                    jokerBonuses.Add(joker.CalculateBonus(cards));
                 }
+                else
+                {
+                    jokerBonuses.Add((0, 0));
+                }
+            }
+
+            // 先累加所有 chips 加成（左到右）
+            foreach (var jb in jokerBonuses)
+            {
+                totalChips += jb.chipsBonus;
+            }
+
+            // 再累加所有 mult 加成（左到右）
+            foreach (var jb in jokerBonuses)
+            {
+                totalMult += jb.multBonus;
             }
         }
 

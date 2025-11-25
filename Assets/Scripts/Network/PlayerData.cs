@@ -16,6 +16,12 @@ public class PlayerData : NetworkBehaviour
     [SyncVar(hook = nameof(OnAvatarIdChanged))]
     public int avatarId = 0;
 
+    // Financial fields:
+    // - `money`: player's liquid balance used for bets/purchases during an active game.
+    // - `debt`: accumulated borrowed amount. Borrowing is only allowed outside an active game (via MainMenu "borrow" UI).
+    // - Max debt policy: max debt = initialFunds * 10 (default initialFunds = 20 -> max debt = 200).
+    // - During an active game, server-side validation must ensure bets/purchases do not exceed `money`.
+    // - When player wins, winnings should be applied to `PayDebt` first, then remaining added to `money`.
     [SyncVar(hook = nameof(OnMoneyChanged))]
     public int money = 20; // 起始资金
 
@@ -99,12 +105,15 @@ public class PlayerData : NetworkBehaviour
     [Server]
     public void AddMoney(int amount)
     {
+        // 增加资金（服务器端调用）。注意：在应用奖励/胜利收入时，先应调用 PayDebt() 来清偿欠债。
         money += amount;
     }
 
     [Server]
     public void SubtractMoney(int amount)
     {
+        // 扣除资金（服务器端调用）。如果扣钱导致余额为负，则将负值转入 debt，并将 money 置为 0。
+        // 这实现了在游戏内不允许继续增加借款（借款应在主菜单发生），但仍能处理因扣除导致的短期透支转为 debt。
         money -= amount;
         if (money < 0)
         {
@@ -114,8 +123,24 @@ public class PlayerData : NetworkBehaviour
     }
 
     [Server]
+    public bool TrySubtractMoney(int amount)
+    {
+        // 尝试扣除资金但不创建额外欠债。如果余额不足则返回 false，不做任何修改。
+        if (amount <= 0)
+            return false;
+
+        if (money >= amount)
+        {
+            money -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    [Server]
     public void PayDebt(int amount)
     {
+        // 优先偿还欠债（服务器端调用）。amount 为可用于还债的数额。
         if (debt > 0)
         {
             int payAmount = Mathf.Min(amount, debt);

@@ -19,6 +19,12 @@ public class NetworkManagerCustom : NetworkManager
     [SerializeField] private RoomUI roomUI;
 
     // room player netIds are stored in RoomState.roomPlayerIds (SyncList<uint>)
+    // Game rules / server authority notes:
+    // - Borrowing (debt) is only allowed outside of an active game (from the MainMenu "borrow" UI).
+    // - Maximum allowed debt per player = initialFunds * 10. Default initialFunds = 20 => max debt = 200.
+    // - During an active game (CreateRoom/JoinRoom/GameScene), players may not increase debt; bets must be covered by currentMoney.
+    // - All critical financial operations (bet, buy, subtract money) must be validated on the server (host).
+    // - When a player wins, winnings are first applied to reduce debt, then remaining amount is added to currentMoney.
     public bool isHost = false;
 
     public static NetworkManagerCustom Instance { get; private set; }

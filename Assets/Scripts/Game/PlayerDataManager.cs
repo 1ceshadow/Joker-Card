@@ -15,6 +15,8 @@ public class PlayerSaveData
     public int money = 20;
     public int debt = 0;
     public List<JokerData> jokers = new List<JokerData>();
+    // 记录主菜单借入的金额（borrowedAmount），用于持久化玩家欠款来源
+    public int borrowedAmount = 0;
 }
 
 public class PlayerDataManager : MonoBehaviour

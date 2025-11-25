@@ -66,19 +66,11 @@ public class ShopManager : MonoBehaviour
             return false;
 
         // 检查玩家资金
-        if (playerData.money < joker.shopPrice)
+        // 游戏/网络规则：购买时不应在客户端/服务端中产生新的欠债（借钱仅在主菜单）
+        if (!playerData.TrySubtractMoney(joker.shopPrice))
         {
-            // 允许欠债
-            int totalCost = joker.shopPrice;
-            int availableMoney = playerData.money;
-            int debtAmount = totalCost - availableMoney;
-
-            playerData.SubtractMoney(availableMoney);
-            playerData.SubtractMoney(debtAmount); // 这会增加债务
-        }
-        else
-        {
-            playerData.SubtractMoney(joker.shopPrice);
+            Debug.LogWarning($"BuyJoker: 玩家 {playerData.playerName} 余额不足，购买被拒绝。");
+            return false;
         }
 
         // 添加小丑牌到玩家

@@ -19,6 +19,7 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private Button returnToMenuButton;
     [SerializeField] private TextMeshProUGUI potText;
     [SerializeField] private TextMeshProUGUI winnerText;
+    [SerializeField] private TextMeshProUGUI messageText;
 
     private void Start()
     {
@@ -89,6 +90,21 @@ public class ResultUI : MonoBehaviour
             {
                 winnerText.text = $"获胜者: {string.Join(", ", winnerNames)}";
             }
+        }
+    }
+
+    public void ShowMessage(string message)
+    {
+        if (messageText != null)
+        {
+            messageText.text = message;
+            // 不清除：保留消息，UI 可以自行控制隐藏
+            if (resultPanel != null && !resultPanel.activeSelf)
+                resultPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.Log(message);
         }
     }
 

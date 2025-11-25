@@ -298,6 +298,16 @@ public class GameUI : MonoBehaviour
         }
     }
 
+    public void ShowStartFailed(string reason)
+    {
+        // 简单提示：目前没有全局弹窗系统，先使用 Debug.Log 并在结果 UI 上短暂显示（如果可用）
+        Debug.LogWarning("游戏开始失败: " + reason);
+        if (resultUI != null)
+        {
+            resultUI.ShowMessage(reason);
+        }
+    }
+
     private void ShowPlayedCards(uint playerNetId, List<Card> cards, int score)
     {
         // 清除中心区域的牌

@@ -72,6 +72,17 @@ public class GameManager : NetworkBehaviour
         if (players.Count < 2)
             return;
 
+        // Ensure all players can cover the starting ante WITHOUT borrowing during the game.
+        foreach (PlayerData p in players)
+        {
+            if (p.money < startingAnte)
+            {
+                Debug.LogWarning($"无法开始游戏：玩家 {p.playerName} 资金不足以支付起始底金 {startingAnte}");
+                RpcOnStartFailed("部分玩家资金不足以支付起始底金，请在主菜单借钱或调整玩家资金后重试。");
+                return;
+            }
+        }
+
         gameStarted = true;
         gameEnded = false;
 
@@ -85,23 +96,22 @@ public class GameManager : NetworkBehaviour
             playOrder[randomIndex] = temp;
         }
 
-        // 2. 所有人投入押金
+        // 2. 所有人投入押金（使用 TrySubtractMoney 确保不会在局内产生新欠债）
         pot = 0;
         foreach (PlayerData player in players)
         {
             player.ResetGameState();
-            if (player.money >= startingAnte)
+            bool taken = player.TrySubtractMoney(startingAnte);
+            if (taken)
             {
-                player.SubtractMoney(startingAnte);
                 pot += startingAnte;
             }
             else
             {
-                // 允许欠债
-                int debt = startingAnte - player.money;
-                player.SubtractMoney(player.money);
-                player.SubtractMoney(debt);
-                pot += startingAnte;
+                // 已在前面校验过，所以这里不应发生；作为防御性检查，记录并中止
+                Debug.LogError($"StartGame: 无法从玩家 {player.playerName} 扣除起始底金 (防御性中止)。");
+                RpcOnStartFailed("服务器内部错误：无法扣除起始底金。请重试。");
+                return;
             }
         }
 
@@ -209,18 +219,11 @@ public class GameManager : NetworkBehaviour
         if (amount <= 0)
             return;
 
-        // 扣除资金（允许欠债）
-        int totalCost = amount;
-        int availableMoney = player.money;
-        if (availableMoney < totalCost)
+        // 扣除资金：游戏内不允许在押注时产生新欠债，必须有足够的余额
+        if (!player.TrySubtractMoney(amount))
         {
-            int debtAmount = totalCost - availableMoney;
-            player.SubtractMoney(availableMoney);
-            player.SubtractMoney(debtAmount);
-        }
-        else
-        {
-            player.SubtractMoney(amount);
+            Debug.LogWarning($"玩家 {player.playerName} 余额不足，拒绝押注 {amount}");
+            return;
         }
 
         // 增加底池
@@ -444,6 +447,16 @@ public class GameManager : NetworkBehaviour
             gameUI = FindFirstObjectByType<GameUI>();
         if (gameUI != null)
             gameUI.OnGameEnded(winnerNetIds, scores, finalPot);
+    }
+
+    [ClientRpc]
+    private void RpcOnStartFailed(string reason)
+    {
+        Debug.LogWarning("RpcOnStartFailed: " + reason);
+        if (gameUI == null)
+            gameUI = FindFirstObjectByType<GameUI>();
+        if (gameUI != null)
+            gameUI.ShowStartFailed(reason);
     }
 
     // JSON 包装类
