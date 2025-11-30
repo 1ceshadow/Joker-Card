@@ -112,14 +112,27 @@ public class MainMenu : MonoBehaviour
             if (gridLayout == null)
             {
                 gridLayout = avatarSelectionParent.gameObject.AddComponent<UnityEngine.UI.GridLayoutGroup>();
-                gridLayout.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
-                gridLayout.constraintCount = 5; // 5列，可以根据需要调整
-                // 设置对齐方式：左上角对齐
-                gridLayout.childAlignment = TextAnchor.UpperLeft;
-                gridLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
-                gridLayout.startAxis = GridLayoutGroup.Axis.Horizontal;
-                Debug.Log("已自动添加 GridLayoutGroup 到 avatarSelectionParent");
             }
+            
+            // 配置 Grid Layout Group
+            gridLayout.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
+            gridLayout.constraintCount = 5; // 5列
+            gridLayout.cellSize = new Vector2(100, 100); // 设置单元格大小
+            gridLayout.spacing = new Vector2(10, 10); // 设置间距
+            gridLayout.padding = new RectOffset(10, 10, 10, 10); // 设置内边距
+            gridLayout.childAlignment = TextAnchor.UpperCenter; // 居中对齐
+            gridLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
+            gridLayout.startAxis = GridLayoutGroup.Axis.Horizontal;
+            Debug.Log("已配置 GridLayoutGroup");
+
+            // 添加 ContentSizeFitter 以自动调整高度
+            UnityEngine.UI.ContentSizeFitter sizeFitter = avatarSelectionParent.GetComponent<UnityEngine.UI.ContentSizeFitter>();
+            if (sizeFitter == null)
+            {
+                sizeFitter = avatarSelectionParent.gameObject.AddComponent<UnityEngine.UI.ContentSizeFitter>();
+            }
+            sizeFitter.horizontalFit = UnityEngine.UI.ContentSizeFitter.FitMode.Unconstrained;
+            sizeFitter.verticalFit = UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
 
             // 设置 avatarSelectionParent 的 RectTransform（横向拉伸并顶端对齐）
             RectTransform rectTransform = avatarSelectionParent.GetComponent<RectTransform>();
@@ -305,34 +318,14 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("点击创建房间");
         
-        // 先切换到房间场景
-        try
+        if (NetworkManagerCustom.Instance == null)
         {
-            NetworkManagerCustom.Instance.isHost = true;
-            // 使用 NetworkManagerCustom 来运行协程（因为它不会被销毁）
-            NetworkManagerCustom networkManager = NetworkManagerCustom.Instance;
-            if (networkManager == null)
-            {
-                networkManager = FindFirstObjectByType<NetworkManagerCustom>();
-            }
-            
-            if (networkManager != null)
-            {
-                // 让 NetworkManagerCustom 处理场景切换和创建房间
-                networkManager.StartCoroutine(networkManager.CreateRoomAfterSceneLoad());
-            }
-            else
-            {
-                Debug.LogError("找不到 NetworkManagerCustom！");
-            }
-            
-            UnityEngine.SceneManagement.SceneManager.LoadScene("CreateRoom");
+            Debug.LogError("找不到 NetworkManagerCustom！");
+            return;
         }
-        catch (System.Exception e)
-        {
-            NetworkManagerCustom.Instance.isHost = false;
-            Debug.LogError($"场景切换失败: {e.Message}。请确保 'CreateRoom' 场景已添加到 Build Settings！");
-        }
+
+        // 直接调用 CreateRoom，NetworkManager 会自动切换到 roomScene
+        NetworkManagerCustom.Instance.CreateRoom();
     }
 
     private void OnJoinRoomClicked()

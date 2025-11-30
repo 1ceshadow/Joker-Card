@@ -16,14 +16,161 @@ public class ShopUI : MonoBehaviour
 
     [Header("玩家小丑牌列表")]
     [SerializeField] private Transform playerJokersParent;
+    
+    [Header("商店信息UI")]
+    [SerializeField] private TextMeshProUGUI moneyText;          // 玩家金币显示
+    [SerializeField] private TextMeshProUGUI jokerCountText;     // 小丑牌数量显示
+    [SerializeField] private Button refreshButton;               // 刷新商店按钮
+    [SerializeField] private TextMeshProUGUI refreshCostText;    // 刷新费用显示
+    [SerializeField] private TextMeshProUGUI messageText;        // 提示信息
+    
+    private float messageTimer = 0f;
+    private const float MESSAGE_DISPLAY_TIME = 3f;
 
     private List<GameObject> shopJokerObjects = new List<GameObject>();
     private List<GameObject> playerJokerObjects = new List<GameObject>();
+    
+    // 是否在主菜单场景（决定使用本地数据还是网络数据）
+    private bool isMainMenuScene = true;
+
+    private void Start()
+    {
+        // 订阅事件
+        if (ShopManager.Instance != null)
+        {
+            ShopManager.Instance.OnShopChanged += OnShopDataChanged;
+            ShopManager.Instance.OnPurchaseResult += ShowMessage;
+        }
+        
+        // 设置刷新按钮
+        if (refreshButton != null)
+        {
+            refreshButton.onClick.AddListener(OnRefreshShopClicked);
+        }
+        
+        Initialize();
+    }
+    
+    private void OnDestroy()
+    {
+        // 取消订阅事件
+        if (ShopManager.Instance != null)
+        {
+            ShopManager.Instance.OnShopChanged -= OnShopDataChanged;
+            ShopManager.Instance.OnPurchaseResult -= ShowMessage;
+        }
+    }
+    
+    private void Update()
+    {
+        // 消息自动隐藏
+        if (messageTimer > 0)
+        {
+            messageTimer -= Time.deltaTime;
+            if (messageTimer <= 0 && messageText != null)
+            {
+                messageText.gameObject.SetActive(false);
+            }
+        }
+    }
 
     public void Initialize()
     {
+        // 检测当前场景
+        isMainMenuScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "MainMenu";
+        
+        // 确保商店不为空
+        if (ShopManager.Instance != null)
+        {
+            ShopManager.Instance.EnsureShopNotEmpty();
+        }
+        
         UpdateShopJokers();
         UpdatePlayerJokers();
+        UpdateMoneyDisplay();
+        UpdateRefreshCostDisplay();
+    }
+    
+    /// <summary>
+    /// 商店数据变化时刷新UI
+    /// </summary>
+    private void OnShopDataChanged()
+    {
+        UpdateShopJokers();
+        UpdatePlayerJokers();
+        UpdateMoneyDisplay();
+    }
+    
+    /// <summary>
+    /// 显示提示消息
+    /// </summary>
+    public void ShowMessage(string message)
+    {
+        if (messageText != null)
+        {
+            messageText.text = message;
+            messageText.gameObject.SetActive(true);
+            messageTimer = MESSAGE_DISPLAY_TIME;
+        }
+        Debug.Log($"[ShopUI] {message}");
+    }
+    
+    /// <summary>
+    /// 更新金币显示
+    /// </summary>
+    private void UpdateMoneyDisplay()
+    {
+        if (moneyText == null) return;
+        
+        if (isMainMenuScene)
+        {
+            PlayerDataManager dataManager = FindFirstObjectByType<PlayerDataManager>();
+            if (dataManager != null)
+            {
+                PlayerSaveData saveData = dataManager.LoadPlayerData();
+                if (saveData != null)
+                {
+                    if (saveData.debt > 0)
+                        moneyText.text = $"金币: {saveData.money}  负债: {saveData.debt}";
+                    else
+                        moneyText.text = $"金币: {saveData.money}";
+                }
+            }
+        }
+        else
+        {
+            PlayerData localPlayer = GetLocalPlayer();
+            if (localPlayer != null)
+            {
+                if (localPlayer.debt > 0)
+                    moneyText.text = $"金币: {localPlayer.money}  负债: {localPlayer.debt}";
+                else
+                    moneyText.text = $"金币: {localPlayer.money}";
+            }
+        }
+    }
+    
+    /// <summary>
+    /// 更新刷新费用显示
+    /// </summary>
+    private void UpdateRefreshCostDisplay()
+    {
+        if (refreshCostText != null && ShopManager.Instance != null)
+        {
+            refreshCostText.text = $"刷新 ({ShopManager.Instance.RefreshCost}金币)";
+        }
+    }
+    
+    /// <summary>
+    /// 刷新商店按钮点击
+    /// </summary>
+    private void OnRefreshShopClicked()
+    {
+        if (ShopManager.Instance != null)
+        {
+            ShopManager.Instance.RefreshShop(free: false);
+            // UI会通过事件自动更新
+        }
     }
 
     public void UpdateShopJokers()
@@ -42,44 +189,6 @@ public class ShopUI : MonoBehaviour
         }
         shopJokerObjects.Clear();
 
-        // 确保有 Grid Layout Group（5列2行）
-        UnityEngine.UI.GridLayoutGroup gridLayout = shopJokersParent.GetComponent<UnityEngine.UI.GridLayoutGroup>();
-        if (gridLayout == null)
-        {
-            gridLayout = shopJokersParent.gameObject.AddComponent<UnityEngine.UI.GridLayoutGroup>();
-            gridLayout.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
-            gridLayout.constraintCount = 5; // 5列
-            gridLayout.childAlignment = TextAnchor.UpperLeft;
-            gridLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
-            gridLayout.startAxis = GridLayoutGroup.Axis.Horizontal;
-            // 设置单元格大小和间距
-            gridLayout.cellSize = new Vector2(150, 150); // 每个卡牌 150x150
-            gridLayout.spacing = new Vector2(10, 10); // 间距 10px
-            Debug.Log("已自动添加并配置 GridLayoutGroup 到 shopJokersParent");
-        }
-        
-        // 确保 shopJokersParent 的 RectTransform 设置正确
-        RectTransform rectTransform = shopJokersParent.GetComponent<RectTransform>();
-        if (rectTransform != null)
-        {
-            // 设置锚点为左上角
-            rectTransform.anchorMin = new Vector2(0, 1);
-            rectTransform.anchorMax = new Vector2(1, 1); // 横向拉伸（配合 GridLayoutGroup）
-            rectTransform.pivot = new Vector2(0, 1);
-            // 设置一个合理的高度（GridLayoutGroup 会根据内容自动调整）
-            rectTransform.anchoredPosition = Vector2.zero;
-            rectTransform.sizeDelta = new Vector2(0, 350); // 高度固定为 350（5 行 × 70 高 + 间距）
-        }
-
-        // 确保有 ContentSizeFitter，让高度自动调整
-        UnityEngine.UI.ContentSizeFitter sizeFitter = shopJokersParent.GetComponent<UnityEngine.UI.ContentSizeFitter>();
-        if (sizeFitter == null)
-        {
-            sizeFitter = shopJokersParent.gameObject.AddComponent<UnityEngine.UI.ContentSizeFitter>();
-            sizeFitter.verticalFit = UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
-            Debug.Log("已添加 ContentSizeFitter 到 shopJokersParent");
-        }
-
         // 获取商店小丑牌
         if (ShopManager.Instance != null)
         {
@@ -95,12 +204,20 @@ public class ShopUI : MonoBehaviour
                     continue;
                 }
                 
-                // 设置卡牌的 RectTransform（确保有正确的大小）
+                // 确保有 RectTransform 并重置，让 GridLayoutGroup 完全控制布局
                 RectTransform jokerRect = jokerObj.GetComponent<RectTransform>();
-                if (jokerRect != null)
+                if (jokerRect == null)
                 {
-                    jokerRect.sizeDelta = new Vector2(140, 140); // 稍微小于 cellSize 以留出间距
+                    // 如果 prefab 根对象没有 RectTransform，添加一个
+                    jokerRect = jokerObj.AddComponent<RectTransform>();
                 }
+                // 重置 RectTransform 属性，避免影响 GridLayoutGroup
+                jokerRect.localScale = Vector3.one;
+                jokerRect.localPosition = Vector3.zero;
+                jokerRect.anchorMin = Vector2.zero;
+                jokerRect.anchorMax = Vector2.one;
+                jokerRect.offsetMin = Vector2.zero;
+                jokerRect.offsetMax = Vector2.zero;
                 
                 JokerItemUI jokerUI = jokerObj.GetComponent<JokerItemUI>();
                 if (jokerUI != null)
@@ -120,7 +237,7 @@ public class ShopUI : MonoBehaviour
             
             // 强制刷新布局
             Canvas.ForceUpdateCanvases();
-            UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(shopJokersParent.GetComponent<RectTransform>());
         }
         else
         {
@@ -151,6 +268,20 @@ public class ShopUI : MonoBehaviour
                 for (int i = 0; i < saveData.jokers.Count; i++)
                 {
                     GameObject jokerObj = Instantiate(jokerItemPrefab, playerJokersParent);
+                    
+                    // 确保有 RectTransform 并重置，让 GridLayoutGroup 完全控制布局
+                    RectTransform jokerRect = jokerObj.GetComponent<RectTransform>();
+                    if (jokerRect == null)
+                    {
+                        jokerRect = jokerObj.AddComponent<RectTransform>();
+                    }
+                    jokerRect.localScale = Vector3.one;
+                    jokerRect.localPosition = Vector3.zero;
+                    jokerRect.anchorMin = Vector2.zero;
+                    jokerRect.anchorMax = Vector2.one;
+                    jokerRect.offsetMin = Vector2.zero;
+                    jokerRect.offsetMax = Vector2.zero;
+                    
                     JokerItemUI jokerUI = jokerObj.GetComponent<JokerItemUI>();
                     if (jokerUI != null)
                     {
@@ -158,43 +289,132 @@ public class ShopUI : MonoBehaviour
                     }
                     playerJokerObjects.Add(jokerObj);
                 }
+                
+                // 强制刷新布局
+                Canvas.ForceUpdateCanvases();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(playerJokersParent.GetComponent<RectTransform>());
             }
+        }
+        
+        // 更新小丑牌数量显示
+        UpdateJokerCountDisplay();
+    }
+    
+    /// <summary>
+    /// 更新小丑牌数量显示
+    /// </summary>
+    private void UpdateJokerCountDisplay()
+    {
+        if (jokerCountText == null) return;
+        
+        int currentCount = 0;
+        int maxCount = ShopManager.Instance != null ? ShopManager.Instance.MaxPlayerJokers : 5;
+        
+        if (isMainMenuScene)
+        {
+            PlayerDataManager dataManager = FindFirstObjectByType<PlayerDataManager>();
+            if (dataManager != null)
+            {
+                PlayerSaveData saveData = dataManager.LoadPlayerData();
+                if (saveData != null && saveData.jokers != null)
+                {
+                    currentCount = saveData.jokers.Count;
+                }
+            }
+        }
+        else
+        {
+            PlayerData localPlayer = GetLocalPlayer();
+            if (localPlayer != null)
+            {
+                currentCount = localPlayer.GetJokers().Count;
+            }
+        }
+        
+        jokerCountText.text = $"小丑牌: {currentCount}/{maxCount}";
+        
+        // 如果满了，变成红色警告
+        if (currentCount >= maxCount)
+        {
+            jokerCountText.color = Color.red;
+        }
+        else
+        {
+            jokerCountText.color = Color.white;
         }
     }
 
     private void OnBuyJoker(int index)
     {
-        // 获取本地玩家
-        PlayerData localPlayer = GetLocalPlayer();
-        if (localPlayer == null)
-            return;
-
-        // 购买小丑牌
-        if (ShopManager.Instance != null)
+        if (isMainMenuScene)
         {
-            bool success = ShopManager.Instance.BuyJoker(index, localPlayer);
-            if (success)
+            // 主菜单场景：使用本地存档
+            if (ShopManager.Instance != null)
             {
-                UpdateShopJokers();
-                UpdatePlayerJokers();
+                ShopManager.Instance.BuyJokerLocal(index);
+                // UI会通过事件自动更新
+            }
+        }
+        else
+        {
+            // 游戏场景：使用网络数据
+            PlayerData localPlayer = GetLocalPlayer();
+            if (localPlayer == null)
+            {
+                ShowMessage("未找到本地玩家！");
+                return;
+            }
+
+            if (ShopManager.Instance != null)
+            {
+                bool success = ShopManager.Instance.BuyJoker(index, localPlayer);
+                if (success)
+                {
+                    UpdateShopJokers();
+                    UpdatePlayerJokers();
+                    UpdateMoneyDisplay();
+                }
+                else
+                {
+                    ShowMessage("购买失败！");
+                }
             }
         }
     }
 
     private void OnSellJoker(int index)
     {
-        // 获取本地玩家
-        PlayerData localPlayer = GetLocalPlayer();
-        if (localPlayer == null)
-            return;
-
-        // 售卖小丑牌
-        if (ShopManager.Instance != null)
+        if (isMainMenuScene)
         {
-            bool success = ShopManager.Instance.SellJoker(index, localPlayer);
-            if (success)
+            // 主菜单场景：使用本地存档
+            if (ShopManager.Instance != null)
             {
-                UpdatePlayerJokers();
+                ShopManager.Instance.SellJokerLocal(index);
+                // UI会通过事件自动更新
+            }
+        }
+        else
+        {
+            // 游戏场景：使用网络数据
+            PlayerData localPlayer = GetLocalPlayer();
+            if (localPlayer == null)
+            {
+                ShowMessage("未找到本地玩家！");
+                return;
+            }
+
+            if (ShopManager.Instance != null)
+            {
+                bool success = ShopManager.Instance.SellJoker(index, localPlayer);
+                if (success)
+                {
+                    UpdatePlayerJokers();
+                    UpdateMoneyDisplay();
+                }
+                else
+                {
+                    ShowMessage("卖出失败！");
+                }
             }
         }
     }

@@ -1,12 +1,17 @@
 using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement; // 新增：用于场景切换
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 自定义网络管理器
 /// 位置：Assets/Scripts/Network/NetworkManagerCustom.cs
 /// 功能：管理网络连接、房间创建、玩家加入等
+/// 
+/// 设计原则：
+/// 1. NetworkManager 继承自 NetworkManager，不是 NetworkBehaviour，不能用 [ClientRpc]
+/// 2. 使用静态事件通知 UI 更新
+/// 3. 玩家列表直接从 NetworkServer.spawned 或 NetworkClient.spawned 获取
 /// </summary>
 public class NetworkManagerCustom : NetworkManager
 {
@@ -14,371 +19,414 @@ public class NetworkManagerCustom : NetworkManager
     [SerializeField] private int maxPlayers = 5;
     [SerializeField] private int minPlayersToStart = 2;
 
-    [Header("UI引用")]
-    [SerializeField] private MainMenu mainMenu;
-    [SerializeField] private RoomUI roomUI;
+    [Header("场景设置")]
+    [SerializeField] private string roomScene = "CreateRoom";
+    [SerializeField] private string gameScene = "GameScene";
+    [SerializeField] private string mainMenuScene = "MainMenu";
 
-    // room player netIds are stored in RoomState.roomPlayerIds (SyncList<uint>)
-    // Game rules / server authority notes:
-    // - Borrowing (debt) is only allowed outside of an active game (from the MainMenu "borrow" UI).
-    // - Maximum allowed debt per player = initialFunds * 10. Default initialFunds = 20 => max debt = 200.
-    // - During an active game (CreateRoom/JoinRoom/GameScene), players may not increase debt; bets must be covered by currentMoney.
-    // - All critical financial operations (bet, buy, subtract money) must be validated on the server (host).
-    // - When a player wins, winnings are first applied to reduce debt, then remaining amount is added to currentMoney.
-    public bool isHost = false;
+    /// <summary>
+    /// 是否为房主（Host）
+    /// </summary>
+    public bool IsHost { get; private set; } = false;
 
+    /// <summary>
+    /// 单例实例
+    /// </summary>
     public static NetworkManagerCustom Instance { get; private set; }
+
+    // ============ 静态事件（UI 订阅这些事件来更新） ============
+    
+    /// <summary>
+    /// 玩家列表变化事件（玩家加入或离开时触发）
+    /// </summary>
+    public static event System.Action OnPlayersChanged;
+
+    /// <summary>
+    /// 连接成功事件
+    /// </summary>
+    public static event System.Action OnConnected;
+
+    /// <summary>
+    /// 断开连接事件
+    /// </summary>
+    public static event System.Action OnDisconnected;
+
+    /// <summary>
+    /// 连接失败事件（参数为错误信息）
+    /// </summary>
+    public static event System.Action<string> OnConnectionFailed;
+
+    /// <summary>
+    /// 房间创建成功事件（参数为房间 IP）
+    /// </summary>
+    public static event System.Action<string> OnRoomCreated;
+
+    /// <summary>
+    /// 是否正在尝试连接
+    /// </summary>
+    public bool IsConnecting { get; private set; } = false;
+
+    // ============ 生命周期 ============
 
     public override void Awake()
     {
-        // 检查是否已经有 Instance（避免 Multiple NetworkManagers 警告）
+        // 单例检查
         if (Instance != null && Instance != this)
         {
-            Debug.LogWarning("NetworkManagerCustom 已存在，销毁重复的实例");
+            Debug.LogWarning("[NetworkManager] 已存在实例，销毁重复的");
             Destroy(gameObject);
             return;
         }
 
-        // 确保有 Transport 组件
+        // 确保有 Transport
         if (transport == null)
         {
-            // 尝试查找现有的 Transport
             transport = GetComponent<Transport>();
             if (transport == null)
             {
-                // 添加默认的 Telepathy Transport
                 transport = gameObject.AddComponent<TelepathyTransport>();
-                Debug.Log("已自动添加 TelepathyTransport 组件");
+                Debug.Log("[NetworkManager] 已自动添加 TelepathyTransport");
             }
         }
 
         base.Awake();
-        
-        if (Instance == null)
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("[NetworkManager] 初始化完成");
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        if (Instance == this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("NetworkManagerCustom 实例已创建并标记为持久化");
+            Instance = null;
         }
     }
 
-    public override void Start()
+    // ============ 服务器端回调 ============
+
+    public override void OnStartServer()
     {
-        base.Start();
-        if (mainMenu == null)
-            mainMenu = FindFirstObjectByType<MainMenu>();
-        if (roomUI == null)
-        {
-            Debug.Log("开始寻找RoomUI");
-            roomUI = FindFirstObjectByType<RoomUI>();
-        }
+        base.OnStartServer();
+        Debug.Log("[Server] 服务器已启动");
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+        Debug.Log("[Server] 服务器已停止");
     }
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
+        // 创建玩家对象
         GameObject player = Instantiate(playerPrefab);
         NetworkServer.AddPlayerForConnection(conn, player);
 
         PlayerData playerData = player.GetComponent<PlayerData>();
         if (playerData != null)
         {
-            Debug.Log($"玩家已加入，netId={playerData.netId}");
-            
-            // 立即更新服务器端的 RoomUI
-            // 使用 GetRoomPlayers() 直接从 spawned 字典中查询，无需依赖 RoomState SyncList
-            UpdateRoomUI();
+            Debug.Log($"[Server] 玩家加入，connId={conn.connectionId}, netId={playerData.netId}");
         }
+
+        // 触发事件通知 UI 更新
+        OnPlayersChanged?.Invoke();
     }
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
-        PlayerData playerData = conn.identity.GetComponent<PlayerData>();
-        if (playerData != null)
-        {
-            Debug.Log($"玩家已离开，netId={playerData.netId}");
-            
-            // 立即更新服务器端的 RoomUI
-            UpdateRoomUI();
-        }
+        Debug.Log($"[Server] 玩家断开，connId={conn.connectionId}");
         
         base.OnServerDisconnect(conn);
+
+        // 触发事件通知 UI 更新
+        OnPlayersChanged?.Invoke();
+    }
+
+    // ============ 客户端回调 ============
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        Debug.Log("[Client] 客户端已启动");
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        Debug.Log("[Client] 客户端已停止");
     }
 
     public override void OnClientConnect()
     {
         base.OnClientConnect();
-        Debug.Log("客户端连接成功");
+        Debug.Log("[Client] 已连接到服务器");
+        
+        IsConnecting = false;
+        OnConnected?.Invoke();
+    }
 
-        // 只有客户端时才需要更新 UI（host 兼具 server 和 client）
-        if (!NetworkServer.active)
-        {
-            Debug.Log("客户端已连接到服务器，等待加载 CreateRoom 场景...");
-            // 场景加载后 RoomUI 会触发 UpdatePlayerList，在 UpdateRoomUIClientAfterConnect 中处理
-            StartCoroutine(UpdateRoomUIClientAfterConnect());
-        }
+    /// <summary>
+    /// 客户端连接失败时调用
+    /// </summary>
+    public override void OnClientError(TransportError error, string reason)
+    {
+        base.OnClientError(error, reason);
+        Debug.LogError($"[Client] 连接错误: {error}, {reason}");
+        
+        IsConnecting = false;
+        OnConnectionFailed?.Invoke($"连接失败: {reason}");
     }
 
     public override void OnClientDisconnect()
     {
         base.OnClientDisconnect();
-        Debug.Log("客户端断开连接");
+        Debug.Log("[Client] 与服务器断开连接");
 
-        // 如果还有其他网络连接，等待一下再切换场景
-        if (!NetworkClient.active && !NetworkServer.active)
+        // 如果是在连接过程中断开，说明连接失败
+        if (IsConnecting)
         {
-            Debug.Log("网络已完全断开，返回主菜单");
-            SceneManager.LoadScene("MainMenu");
-        }
-    }
-
-    public void CreateRoom()
-    {
-        Debug.Log("NetworkManagerCustom.CreateRoom() 被调用");
-
-        // 确保 Transport 存在
-        if (transport == null)
-        {
-            transport = GetComponent<Transport>();
-            if (transport == null)
-            {
-                transport = gameObject.AddComponent<TelepathyTransport>();
-                Debug.Log("已自动添加 TelepathyTransport 组件");
-            }
+            IsConnecting = false;
+            OnConnectionFailed?.Invoke("无法连接到服务器，请检查 IP 地址是否正确");
+            return; // 不自动切换场景，让 UI 处理
         }
 
-        // 启动 Host（服务器+客户端）
-        isHost = true;
-        StartHost();
+        OnDisconnected?.Invoke();
 
-        Debug.Log($"StartHost() 已调用，NetworkServer.active={NetworkServer.active}, NetworkClient.active={NetworkClient.active}");
-
-        // 延迟更新 UI，等待网络启动
-        StartCoroutine(UpdateRoomUIAfterHostStart());
+        // 不在这里切换场景，让调用者处理
     }
 
     /// <summary>
-    /// 房主场景切换到 CreateRoom 后的初始化（启动 Host）
+    /// 客户端场景加载完成时调用
     /// </summary>
-    public System.Collections.IEnumerator CreateRoomAfterSceneLoad()
+    public override void OnClientSceneChanged()
     {
-        Debug.Log("房主: 场景加载完成，准备启动 Host");
+        base.OnClientSceneChanged();
+        Debug.Log($"[Client] 场景已切换: {SceneManager.GetActiveScene().name}");
         
-        // 等待场景加载完成
+        // 延迟触发玩家列表更新（等待 spawn 完成）
+        StartCoroutine(DelayedPlayersChanged());
+    }
+
+    private System.Collections.IEnumerator DelayedPlayersChanged()
+    {
         yield return new WaitForSeconds(0.2f);
+        OnPlayersChanged?.Invoke();
+    }
 
+    // ============ 公共方法 ============
+
+    /// <summary>
+    /// 创建房间（作为 Host）
+    /// </summary>
+    public void CreateRoom()
+    {
+        Debug.Log("[NetworkManager] 创建房间");
+
+        IsHost = true;
+        
+        // 设置在线场景为房间场景
+        onlineScene = roomScene;
+        
         // 启动 Host
-        CreateRoom();
+        StartHost();
 
-        // 等待服务器启动
-        int attempts = 0;
-        while (!NetworkServer.active && attempts < 50)
-        {
-            yield return new WaitForSeconds(0.1f);
-            attempts++;
-        }
-
-        if (!NetworkServer.active)
-        {
-            Debug.LogError("房主: Host 启动失败！");
-            yield break;
-        }
-
-        Debug.Log("房主: Host 已启动，现在等待 RoomUI 加载完成...");
-
-        // 等待 RoomUI 加载完成
-        int uiAttempts = 0;
-        RoomUI roomUI = null;
-        while (roomUI == null && uiAttempts < 50)
-        {
-            roomUI = FindFirstObjectByType<RoomUI>();
-            if (roomUI == null)
-            {
-                yield return new WaitForSeconds(0.1f);
-                uiAttempts++;
-            }
-        }
-
-        if (roomUI != null)
-        {
-            string ip = GetLocalIP();
-            Debug.Log($"房主: RoomUI 已加载，设置房间 IP: {ip}");
-            roomUI.OnRoomCreated(ip);
-        }
-        else
-        {
-            Debug.LogWarning("房主: 未能找到 RoomUI 组件");
-        }
-    }
-
-    private System.Collections.IEnumerator UpdateRoomUIAfterHostStart()
-    {
-        // 这个协程在 CreateRoom() 后被调用
-        // 当新客户端加入时，更新房主端的 RoomUI
+        // 触发房间创建事件
+        string ip = GetLocalIP();
+        OnRoomCreated?.Invoke(ip);
         
-        int attempts = 0;
-        while (!NetworkServer.active && attempts < 20)
-        {
-            yield return new WaitForSeconds(0.1f);
-            attempts++;
-        }
-
-        if (NetworkServer.active)
-        {
-            RoomUI roomUI = FindFirstObjectByType<RoomUI>();
-            if (roomUI != null)
-            {
-                // 立即更新一次玩家列表
-                UpdateRoomUI();
-                Debug.Log("房主: 房间已启动，已更新 RoomUI");
-            }
-        }
+        Debug.Log($"[NetworkManager] Host 已启动，IP: {ip}");
     }
 
-
-
-    // 客户端在 CreateRoom 场景加载后更新 RoomUI（同步玩家列表）
-    private System.Collections.IEnumerator UpdateRoomUIClientAfterConnect()
-    {
-        int uiAttempts = 0;
-        RoomUI ui = null;
-        
-        // 等待 RoomUI 出现（场景加载后）
-        while (ui == null && uiAttempts < 50)
-        {
-            ui = FindFirstObjectByType<RoomUI>();
-            if (ui == null)
-            {
-                yield return new WaitForSeconds(0.1f);
-                uiAttempts++;
-            }
-        }
-
-        if (ui == null)
-        {
-            Debug.LogWarning("客户端: 找不到 RoomUI 组件，无法更新玩家列表");
-            yield break;
-        }
-
-        Debug.Log("客户端: 找到 RoomUI，等待玩家对象生成...");
-
-        // 等待玩家对象被 spawn 到客户端
-        // Mirror 的玩家对象会自动从服务器 spawn 到客户端
-        int playerAttempts = 0;
-        List<PlayerData> players = new List<PlayerData>();
-        
-        while (playerAttempts < 50)
-        {
-            players.Clear();
-            PlayerData[] allPlayers = GameObject.FindObjectsByType<PlayerData>(FindObjectsSortMode.None);
-            if (allPlayers.Length > 0)
-            {
-                players.AddRange(allPlayers);
-                Debug.Log($"客户端: 找到 {players.Count} 个玩家，更新 RoomUI");
-                ui.UpdatePlayerList(players);
-                yield break;
-            }
-            
-            playerAttempts++;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        Debug.LogWarning("客户端: 等待玩家对象超时");
-    }
-
-    public System.Collections.IEnumerator JoinRoomAfterSceneLoad(string ip)
-    {
-        Debug.Log("NetworkManagerCustom: 开始加入房间，IP=" + ip);
-        JoinRoom(ip);
-
-        // 等待客户端连接到服务器
-        int attempts = 0;
-        while (!NetworkClient.active && attempts < 50)
-        {
-            yield return new WaitForSeconds(0.1f);
-            attempts++;
-        }
-
-        if (!NetworkClient.active)
-        {
-            Debug.LogError("NetworkManagerCustom: 客户端连接失败，IP=" + ip + " 可能不正确或服务器未运行");
-            yield break;
-        }
-
-        Debug.Log("NetworkManagerCustom: 客户端已连接，现在加载 CreateRoom 场景与房主同步");
-        // 客户端加入后立即加载 CreateRoom 场景（和房主的场景相同），此时网络已建立
-        SceneManager.LoadScene("CreateRoom");
-    }
-
+    /// <summary>
+    /// 加入房间（作为 Client）
+    /// </summary>
     public void JoinRoom(string ip)
     {
         if (string.IsNullOrEmpty(ip))
         {
-            Debug.LogError("JoinRoom: IP 地址不能为空");
+            Debug.LogError("[NetworkManager] IP 地址不能为空");
+            OnConnectionFailed?.Invoke("IP 地址不能为空");
             return;
         }
 
-        isHost = false;
+        Debug.Log($"[NetworkManager] 加入房间，IP: {ip}");
+
+        IsHost = false;
+        IsConnecting = true;
         networkAddress = ip;
-        Debug.Log("NetworkManagerCustom: 正在以客户端模式连接到 " + ip);
+        
+        // 设置在线场景
+        onlineScene = roomScene;
+        
+        // 启动客户端
         StartClient();
+        
+        // 启动超时检测
+        StartCoroutine(ConnectionTimeout(10f));
     }
 
+    /// <summary>
+    /// 连接超时检测
+    /// </summary>
+    private System.Collections.IEnumerator ConnectionTimeout(float timeout)
+    {
+        float elapsed = 0f;
+        while (elapsed < timeout && IsConnecting)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        
+        if (IsConnecting)
+        {
+            Debug.LogWarning("[NetworkManager] 连接超时");
+            IsConnecting = false;
+            StopClient();
+            OnConnectionFailed?.Invoke("连接超时，请检查 IP 地址和网络");
+        }
+    }
+
+    /// <summary>
+    /// 离开房间
+    /// </summary>
     public void LeaveRoom()
     {
-        Debug.Log("LeaveRoom 被调用");
-        
+        Debug.Log("[NetworkManager] 离开房间");
+
+        bool wasHost = IsHost;
+        IsHost = false;
+        IsConnecting = false;
+
         if (NetworkServer.active && NetworkClient.active)
         {
-            // Host 模式：同时停止服务器和客户端
-            Debug.Log("停止 Host");
+            // Host 模式：先停止
             StopHost();
         }
         else if (NetworkClient.active)
         {
-            // 纯客户端模式：只停止客户端
-            Debug.Log("停止 Client");
+            // 纯客户端
             StopClient();
         }
-        
-        isHost = false;
-        
-        // 销毁 NetworkManager 以避免 Multiple NetworkManagers 警告
-        // （当下次进入时会重新创建新的 NetworkManager）
-        Destroy(gameObject);
+
+        // 主动离开时，直接切换到主菜单
+        // 使用协程延迟一帧，确保网络已完全停止
+        StartCoroutine(ReturnToMainMenu());
     }
 
+    private System.Collections.IEnumerator ReturnToMainMenu()
+    {
+        yield return null; // 等待一帧
+        SceneManager.LoadScene(mainMenuScene);
+    }
+
+    /// <summary>
+    /// 开始游戏（切换到游戏场景）
+    /// </summary>
+    [Server]
+    public void StartGame()
+    {
+        if (!CanStartGame())
+        {
+            Debug.LogWarning("[Server] 无法开始游戏：玩家数量不符合要求");
+            return;
+        }
+
+        Debug.Log("[Server] 开始游戏，切换场景");
+        ServerChangeScene(gameScene);
+    }
+
+    /// <summary>
+    /// 检查是否可以开始游戏
+    /// </summary>
     public bool CanStartGame()
     {
-        // 直接从 spawned 字典中计数玩家，而不是依赖 RoomState SyncList
-        int playerCount = GetRoomPlayers().Count;
-        bool canStart = playerCount >= minPlayersToStart && playerCount <= maxPlayers;
-        return canStart;
+        int playerCount = GetPlayerCount();
+        return playerCount >= minPlayersToStart && playerCount <= maxPlayers;
     }
 
-    private void UpdateRoomUI()
+    /// <summary>
+    /// 获取当前玩家数量
+    /// </summary>
+    public int GetPlayerCount()
     {
-        if (roomUI != null && NetworkServer.active)
+        if (NetworkServer.active)
         {
-            // 直接使用 GetRoomPlayers() 获取所有玩家
-            List<PlayerData> players = GetRoomPlayers();
-            roomUI.UpdatePlayerList(players);
-            Debug.Log($"房间 UI 已更新，当前玩家数={players.Count}");
+            return NetworkServer.connections.Count;
         }
+        return 0;
     }
 
+    /// <summary>
+    /// 获取所有玩家数据（服务器端）
+    /// </summary>
+    public List<PlayerData> GetAllPlayers()
+    {
+        List<PlayerData> players = new List<PlayerData>();
+
+        if (NetworkServer.active)
+        {
+            // 服务器端：从 spawned 获取
+            foreach (var kvp in NetworkServer.spawned)
+            {
+                PlayerData pd = kvp.Value.GetComponent<PlayerData>();
+                if (pd != null)
+                {
+                    players.Add(pd);
+                }
+            }
+        }
+        else if (NetworkClient.active)
+        {
+            // 客户端：从场景中查找
+            PlayerData[] allPlayers = Object.FindObjectsByType<PlayerData>(FindObjectsSortMode.None);
+            players.AddRange(allPlayers);
+        }
+
+        return players;
+    }
+
+    /// <summary>
+    /// 获取本机 IP 地址
+    /// </summary>
     public string GetLocalIP()
     {
-        var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
-        foreach (var ip in host.AddressList)
+        try
         {
-            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+            foreach (var ip in host.AddressList)
             {
-                return ip.ToString();
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    // 优先返回局域网 IP
+                    string ipStr = ip.ToString();
+                    if (ipStr.StartsWith("192.168.") || ipStr.StartsWith("10.") || ipStr.StartsWith("172."))
+                    {
+                        return ipStr;
+                    }
+                }
             }
+            // 如果没有找到局域网 IP，返回任意 IPv4
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[NetworkManager] 获取 IP 失败: {e.Message}");
         }
         return "127.0.0.1";
     }
 
+    /// <summary>
+    /// 获取服务器 IP（如果是 Host 返回本机 IP，否则返回连接的服务器地址）
+    /// </summary>
     public string GetServerIP()
     {
         if (NetworkServer.active)
@@ -388,25 +436,20 @@ public class NetworkManagerCustom : NetworkManager
         return networkAddress;
     }
 
-    // Helper: return server-side list of PlayerData constructed from RoomState.roomPlayerIds
-    public List<PlayerData> GetRoomPlayers()
+    // ============ 兼容旧代码的属性 ============
+    
+    /// <summary>
+    /// 兼容旧代码：isHost 属性
+    /// </summary>
+    public bool isHost
     {
-        List<PlayerData> players = new List<PlayerData>();
-        RoomState roomState = GetComponent<RoomState>();
-        if (roomState == null)
-            return players;
-
-        foreach (uint netId in roomState.roomPlayerIds)
-        {
-            if (NetworkServer.spawned.TryGetValue(netId, out NetworkIdentity identity))
-            {
-                PlayerData pd = identity.GetComponent<PlayerData>();
-                if (pd != null)
-                    players.Add(pd);
-            }
-        }
-
-        return players;
+        get => IsHost;
+        set => IsHost = value;
     }
+
+    /// <summary>
+    /// 兼容旧代码：GetRoomPlayers 方法
+    /// </summary>
+    public List<PlayerData> GetRoomPlayers() => GetAllPlayers();
 }
 

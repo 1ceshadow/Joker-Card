@@ -6,72 +6,136 @@ using System.Collections.Generic;
 using System.Linq;
 
 /// <summary>
-/// join房间UI
-/// 位置：Assets/Scripts/UI/RoomUI2.cs
-/// 功能：输入ip，加入房间
+/// 加入房间 UI
+/// 位置：Assets/Scripts/UI/JoinRoomUI.cs
+/// 功能：输入 IP，加入房间，显示连接状态
 /// </summary>
 public class JoinRoomUI : MonoBehaviour
 {
-
     [Header("加入房间UI")]
     [SerializeField] private TMP_InputField ipInputField;
     [SerializeField] private Button connectButton;
     [SerializeField] private Button scanQRButton;
-    [SerializeField] private Button leaveRoomButton;
+    [SerializeField] private Button backButton;
 
+    [Header("状态显示")]
+    [SerializeField] private TextMeshProUGUI statusText;
+    [SerializeField] private GameObject connectingIndicator; // 连接中的加载指示器
 
-    private NetworkManagerCustom networkManager;
+    private void OnEnable()
+    {
+        // 订阅事件
+        NetworkManagerCustom.OnConnected += OnConnected;
+        NetworkManagerCustom.OnConnectionFailed += OnConnectionFailed;
+    }
 
+    private void OnDisable()
+    {
+        // 取消订阅
+        NetworkManagerCustom.OnConnected -= OnConnected;
+        NetworkManagerCustom.OnConnectionFailed -= OnConnectionFailed;
+    }
 
     private void Start()
     {
-        if (networkManager == null)
-            networkManager = FindFirstObjectByType<NetworkManagerCustom>();
-
         // 初始化按钮
-
-        if (leaveRoomButton != null)
-            leaveRoomButton.onClick.AddListener(OnLeaveRoomClicked);
+        if (backButton != null)
+            backButton.onClick.AddListener(OnBackClicked);
         if (connectButton != null)
             connectButton.onClick.AddListener(OnConnectClicked);
         if (scanQRButton != null)
             scanQRButton.onClick.AddListener(OnScanQRClicked);
 
+        // 初始状态
+        SetStatus("请输入房间 IP 地址");
+        SetConnecting(false);
     }
 
-    private void OnLeaveRoomClicked()
+    private void OnBackClicked()
     {
-        if (networkManager != null)
+        // 如果正在连接，先取消
+        if (NetworkManagerCustom.Instance != null && NetworkManagerCustom.Instance.IsConnecting)
         {
-            networkManager.LeaveRoom();
+            NetworkManagerCustom.Instance.StopClient();
         }
+        
         // 返回主菜单
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     private void OnConnectClicked()
     {
-        string ip = ipInputField != null ? ipInputField.text : "";
-        if (!string.IsNullOrEmpty(ip) && networkManager != null)
+        string ip = ipInputField != null ? ipInputField.text.Trim() : "";
+        
+        if (string.IsNullOrEmpty(ip))
         {
-            Debug.Log("Joining room at IP: " + ip);
-            // 必须使用 StartCoroutine 才能执行协程，否则协程内的代码不会运行
-            networkManager.StartCoroutine(networkManager.JoinRoomAfterSceneLoad(ip));
+            SetStatus("请输入有效的 IP 地址", true);
+            return;
         }
-        else
+
+        if (NetworkManagerCustom.Instance == null)
         {
-            if (string.IsNullOrEmpty(ip))
-                Debug.LogWarning("JoinRoomUI: 请输入有效的 IP 地址");
-            if (networkManager == null)
-                Debug.LogError("JoinRoomUI: NetworkManagerCustom 未找到");
+            SetStatus("网络管理器未找到", true);
+            return;
         }
+
+        // 显示连接中状态
+        SetStatus($"正在连接到 {ip}...");
+        SetConnecting(true);
+        
+        // 尝试连接
+        NetworkManagerCustom.Instance.JoinRoom(ip);
+    }
+
+    /// <summary>
+    /// 连接成功
+    /// </summary>
+    private void OnConnected()
+    {
+        Debug.Log("[JoinRoomUI] 连接成功");
+        SetStatus("连接成功！正在加入房间...");
+        SetConnecting(false);
+        // 场景会自动切换到 CreateRoom
+    }
+
+    /// <summary>
+    /// 连接失败
+    /// </summary>
+    private void OnConnectionFailed(string reason)
+    {
+        Debug.LogWarning($"[JoinRoomUI] 连接失败: {reason}");
+        SetStatus(reason, true);
+        SetConnecting(false);
+    }
+
+    /// <summary>
+    /// 设置状态文本
+    /// </summary>
+    private void SetStatus(string message, bool isError = false)
+    {
+        if (statusText != null)
+        {
+            statusText.text = message;
+            statusText.color = isError ? Color.red : Color.white;
+        }
+    }
+
+    /// <summary>
+    /// 设置连接中状态
+    /// </summary>
+    private void SetConnecting(bool connecting)
+    {
+        if (connectButton != null)
+            connectButton.interactable = !connecting;
+        
+        if (connectingIndicator != null)
+            connectingIndicator.SetActive(connecting);
     }
 
     private void OnScanQRClicked()
     {
         // 打开二维码扫描（需要实现）
-        // QRCodeScanner.Instance?.StartScan();
+        SetStatus("二维码扫描功能开发中...");
     }
-
 }
 
