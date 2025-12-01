@@ -1,203 +1,198 @@
-# Balatro Clone: Technical Design Document (TDD)
+<DOCUMENT filename="balatro_design_zh.md">
+# Balatro 克隆版：技术设计文档 (TDD)
 
-## 1. Project Overview
-**Objective:** Create a faithful recreation of the core mechanics of the game "Balatro".
-**Genre:** Poker-themed Roguelike Deck-builder.
-**Core Loop:** Select Blind -> Play Poker Hands -> Earn Chips/Money -> Buy Jokers/Upgrades in Shop -> Next Blind.
-
----
-
-## 2. Core Game Hierarchy
-
-### 2.1 The Run
-A single game session consisting of multiple **Antes**.
-* **Game Over Condition:** Failing to reach the Target Score (Chips) for a Blind.
-* **Win Condition:** Beating Ante 8 Boss Blind.
-
-### 2.2 Ante Structure
-The game progresses through "Antes" (Level 1, 2, 3...). Each Ante consists of 3 **Blinds**:
-1.  **Small Blind:** Low target score. Reward: $ (Skippable for Tag).
-2.  **Big Blind:** Medium target score. Reward: $$ (Skippable for Tag).
-3.  **Boss Blind:** High target score. Reward: $$$. **Has a Special Ability (Debuff).** (Not Skippable).
-
-### 2.3 The Round
-The actual gameplay within a Blind.
-* **Resources:**
-    * `Hands`: Number of times player can play cards (Default: 4).
-    * `Discards`: Number of times player can discard up to 5 cards (Default: 3).
-    * `Hand Size`: Max cards held (Default: 8).
-    * `Deck`: The current deck of cards (starts with standard 52).
+## 1. 项目概述
+**目标**：忠实还原《Balatro》的核心机制  
+**类型**：扑克主题 Roguelike 牌堆构建游戏  
+**核心循环**：选择 Blind → 打出扑克牌型 → 赚取筹码/金钱 → 在商店购买小丑/升级 → 进入下一个 Blind
 
 ---
 
-## 3. Entity Data Structures
+## 2. 游戏整体结构
 
-### 3.1 Playing Card (Atomic Unit)
-Each card in the deck must have:
-* **Suit:** Spades, Hearts, Clubs, Diamonds.
-* **Rank:** 2-10, J, Q, K, A. (Value: 2-10=Face, JQK=10, A=11).
-* **Enhancement (Slot 1):**
-    * *Bonus:* +30 Chips.
-    * *Mult:* +4 Mult.
-    * *Wild:* Counts as any suit.
-    * *Glass:* X2 Mult, 1/4 chance to destroy on play.
-    * *Steel:* X1.5 Mult while held in hand.
-    * *Stone:* +50 Chips, no Rank/Suit.
-    * *Gold:* Earn $3 if held at end of round.
-    * *Lucky:* 1/5 chance +20 Mult, 1/15 chance +$20.
-* **Edition (Slot 2):**
-    * *Base:* No effect.
-    * *Foil:* +50 Chips.
-    * *Holographic:* +10 Mult.
-    * *Polychrome:* X1.5 Mult.
-* **Seal (Slot 3):**
-    * *Red:* Retrigger card 1 time.
-    * *Blue:* Create Planet card if held at end of round.
-    * *Gold:* Earn $3 on play.
-    * *Purple:* Create Tarot card on discard.
+### 2.1 一局游戏（Run）
+一次完整的游戏过程，由多个 **Ante（阶段）** 组成。  
+- **失败条件**：未达到当前 Blind 要求的筹码目标分数  
+- **胜利条件**：击败 Ante 8 的 Boss Blind
 
-### 3.2 Joker (Core Modifier)
-Jokers are the engine of the build.
-* **Rarity:** Common, Uncommon, Rare, Legendary.
-* **Effect Type:** `+Chips`, `+Mult`, `X Mult`, `Utility`, `Economy`.
-* **Trigger Contexts:**
-    * `OnScore`: Trigger when an individual card is scored.
-    * `OnJokerCalc`: Trigger after cards are scored (Independent).
-    * `OnDiscard`: Trigger when cards are discarded.
-    * `OnEndRound`: Trigger after round clears.
+### 2.2 Ante 结构
+每局游戏按“Ante”递增（Ante 1、Ante 2……），每个 Ante 包含 3 个 **Blind**：
+1. **Small Blind（小盲）**：目标分数低，可跳过换取 Tag，奖励少量金钱  
+2. **Big Blind（大盲）**：目标分数中等，可跳过换取 Tag，奖励中等金钱  
+3. **Boss Blind（Boss 盲）**：目标分数高，**不可跳过**，拥有特殊 Debuff 能力，奖励最多金钱
+
+### 2.3 回合（Round）
+在单个 Blind 内的实际对局。  
+**资源**：
+- `Hands`：可出牌次数（默认 4 次）  
+- `Discards`：可丢弃次数（默认 3 次，每次最多丢 5 张牌）  
+- `Hand Size`：手牌上限（默认 8 张）  
+- `Deck`：当前牌组（初始为标准 52 张扑克）
 
 ---
 
-## 4. The Scoring Engine (CRITICAL)
+## 3. 实体数据结构
 
-The scoring algorithm must follow a strict **Order of Operations**.
-**Formula:** `Final Score = Total Chips * Total Mult`
+### 3.1 扑克牌（最小单位）
+每张牌包含以下属性：
+- **花色**：黑桃、红心、梅花、方块  
+- **点数**：2-10、J、Q、K、A（数值：2-10 面值，J/Q/K=10，A=11）  
+- **强化（槽位 1）**：
+  - Bonus：+30 筹码  
+  - Mult：+4 倍率  
+  - Wild：可当作任意花色  
+  - Glass：×2 倍率，发挥时有 1/4 概率销毁  
+  - Steel：持有时 ×1.5 倍率  
+  - Stone：+50 筹码，无点数与花色  
+  - Gold：回合结束时若持有，赚 $3  
+  - Lucky：1/5 概率 +20 倍率，1/15 概率 +$20  
+- **版本（槽位 2）**：
+  - Base：无效果  
+  - Foil：+50 筹码  
+  - Holographic：+10 倍率  
+  - Polychrome：×1.5 倍率  
+- **印章（槽位 3）**：
+  - 红印：重触发该牌 1 次  
+  - 蓝印：回合结束时若持有，生成 1 张星球卡  
+  - 金印：出牌时赚 $3  
+  - 紫印：丢弃时生成 1 张塔罗卡
 
-### Step-by-Step Pipeline:
-
-1.  **Hand Identification:**
-    * Analyze played cards (max 5 scoring) to determine the Poker Hand (e.g., Flush, Pair).
-    * *Note:* Stone cards count towards "played" count but not towards Rank/Suit logic.
-
-2.  **Base Calculation:**
-    * Fetch `Base Chips` and `Base Mult` from the Hand Type's current **Planet Level**.
-    * *Example (Lvl 1 Pair):* 10 Chips, 2 Mult.
-
-3.  **Card Scoring Loop (Left to Right):**
-    * Iterate through each **Scoring Card** (Non-scoring cards are ignored unless "Splash" Joker exists).
-    * **A. Card Base:** Add Card Rank Value to `Total Chips`.
-    * **B. Card Modifiers:**
-        * Add Enhancement/Edition bonuses to `Total Chips` / `Total Mult`.
-    * **C. Joker Triggers (OnScore):**
-        * Check all Jokers. If condition met (e.g., "Played a Heart"), apply Joker effect.
-    * **D. Card Multipliers:**
-        * Apply Glass/Polychrome (X Mult) to `Total Mult`.
-    * **E. Red Seal:**
-        * If card has Red Seal, repeat steps A-D.
-
-4.  **Hand-Based Triggers:**
-    * Check cards **Held in Hand**. Apply Steel/King/Queen effects (e.g., Steel adds X1.5 Mult).
-
-5.  **Joker Independent Calculation (Left to Right):**
-    * Iterate through Jokers one last time for standalone effects.
-    * Add `+Mult` first.
-    * Apply `X Mult` last (This is why Joker order matters).
-
-6.  **Finalize:**
-    * `Score = Total Chips * Total Mult`.
-    * Add to `Round Score`. Check against `Target Score`.
+### 3.2 小丑（Joker）——核心构建引擎
+- **稀有度**：普通、罕见、稀有、传奇  
+- **效果类型**：+筹码、+倍率、×倍率、功能性、经济性  
+- **触发时机**：
+  - `OnScore`：单张牌计分时触发  
+  - `OnJokerCalc`：牌型计分完成后独立触发  
+  - `OnDiscard`：丢弃牌时触发  
+  - `OnEndRound`：回合结束时触发
 
 ---
 
-## 5. Economy & Shop System
+## 4. 计分引擎（最核心部分）
 
-### 5.1 Money
-* **Base Reward:** Small ($3), Big ($4), Boss ($5).
-* **Interest:** Earn $1 per $5 saved (Max $5 interest by default). Cap at $25 savings.
-* **Hands Remaining:** $1 per remaining hand.
+计分必须严格遵守 **运算顺序**。  
+**最终公式**：`最终分数 = 总筹码 × 总倍率`
 
-### 5.2 The Shop
-Generated after every round. Contains:
-* **2 Cards:** Random selection of Joker, Tarot, Planet, or Spectral cards.
-* **2 Packs:** Booster packs (Standard, Arcana, Celestial, Buffoon, Spectral).
-* **1 Voucher:** Passive permanent upgrade (restocks only after Ante boss).
-* **Reroll:** Cost starts at $5, increases per use in same shop.
+### 详细计分流程：
 
----
+1. **牌型识别**  
+   分析出牌（最多 5 张计分牌）判定当前扑克牌型（如同花、葫芦等）  
+   ※ 石头牌计入“出牌数量”，但不参与点数/花色判定
 
-## 6. Scaling & Difficulty
+2. **基础数值获取**  
+   根据当前牌型的 **星球卡等级** 获取基础筹码与倍率  
+   示例（等级 1 的对子）：10 筹码，2 倍率
 
-### 6.1 Hand Types (Base Values)
-* **High Card:** 5 Chips / 1 Mult
-* **Pair:** 10 / 2
-* **Two Pair:** 20 / 2
-* **Three of a Kind:** 30 / 3
-* **Straight:** 30 / 4
-* **Flush:** 35 / 4
-* **Full House:** 40 / 4
-* **Four of a Kind:** 60 / 7
-* **Straight Flush:** 100 / 8
-* *Royal Flush:* 100 / 8
+3. **逐张计分（从左到右）**  
+   对每张**计分牌**进行以下操作：
+   A. 加上该牌的点数筹码  
+   B. 加上强化/版本的加成  
+   C. 触发所有满足条件的“单张牌计分”小丑效果  
+   D. 应用 Glass/Polychrome 等 ×倍率效果  
+   E. 若有红印，重复 A~D 一次
 
-### 6.2 Ante Scaling (Exponential)
-Target scores increase significantly per Ante.
-* *Rough curve:* `Base * (GrowthFactor ^ Ante)`.
-* Ante 1 Boss: ~600
-* Ante 8 Boss: ~100,000+
+4. **手牌中持有效果**  
+   检查手牌中未出牌的部分，触发 Steel 等效果（如 Steel 牌 ×1.5 倍率）
+
+5. **小丑独立效果（从左到右）**  
+   - 先结算所有 “+倍率”  
+   - 最后结算所有 “×倍率”（这就是小丑顺序非常重要的原因）
+
+6. **最终计算**  
+   `分数 = 总筹码 × 总倍率` → 累加到本回合总分 → 与目标分数对比
 
 ---
 
-## 7. Implementation Pseudo-Code (Python-like)
+## 5. 经济与商店系统
+
+### 5.1 金钱来源
+- 基础奖励：小盲 $3、大盲 $4、Boss $5  
+- 利息：每持有 $5 获得 $1 利息（默认最高 $5 利息），存款上限 $25  
+- 剩余出牌次数：每剩 1 次出牌 +$1
+
+### 5.2 商店
+每打完一个 Blind 后刷新，包含：
+- 2 张单卡：随机出现 小丑 / 塔罗 / 星球 / 幽灵卡  
+- 2 个卡包：标准包、奥术包、天界包、小丑包、幽灵包  
+- 1 张凭证（Voucher）：永久被动升级，仅在击败 Boss 后刷新新凭证  
+- 重掷：首次 $5，每次在本商店内使用后价格上涨
+
+---
+
+## 6. 难度与成长曲线
+
+### 6.1 牌型基础数值（未升级时）
+- 高牌：5 筹码 / 1 倍率  
+- 对子：10 / 2  
+- 两对：20 / 2  
+- 三条：30 / 3  
+- 顺子：30 / 4  
+- 同花：35 / 4  
+- 葫芦：40 / 4  
+- 四条：60 / 7  
+- 同花顺：100 / 8  
+- 皇家同花顺：100 / 8
+
+### 6.2 Ante 难度指数增长
+目标分数呈指数级上升，大致公式：`基础值 × (增长系数 ^ Ante)`  
+- Ante 1 Boss：约 600 分  
+- Ante 8 Boss：10万+ 分
+
+---
+
+## 7. 实现伪代码（类 Python）
 
 ```python
 class ScoringEngine:
     def calculate_hand(self, played_cards, hand_type, jokers, held_cards):
-        # 1. Init from Planet Level
+        # 1. 从星球卡等级获取基础值
         current_chips = hand_type.base_chips + (hand_type.level * hand_type.chip_scale)
         current_mult = hand_type.base_mult + (hand_type.level * hand_type.mult_scale)
 
-        # 2. Score Cards (Left -> Right)
+        # 2. 逐张计分（左→右）
         for card in played_cards:
-            if card.is_debuffed: continue
-            
-            # Repetitions for Red Seal
+            if card.is_debuffed: 
+                continue
+                
+            # 红印重触发
             triggers = 2 if card.seal == "Red" else 1
             
             for _ in range(triggers):
-                # Card Values
-                current_chips += card.get_chip_value() # Rank + Bonus + Foil
-                current_mult += card.get_mult_value()  # Holo + Enhancement
+                # 牌本身数值
+                current_chips += card.get_chip_value()   # 点数 + Bonus + Foil
+                current_mult += card.get_mult_value()    # Holo + Mult强化
                 
-                # Joker triggers specific to card scoring
+                # 小丑单张牌触发
                 for joker in jokers:
                     ret = joker.trigger("on_card_score", card)
                     current_chips += ret.chips
                     current_mult += ret.mult
 
-                # X Mults on cards
-                if card.enhancement == "Glass": current_mult *= 2.0
-                if card.edition == "Polychrome": current_mult *= 1.5
+                # 卡片自带 X 倍率
+                if card.enhancement == "Glass": 
+                    current_mult *= 2.0
+                if card.edition == "Polychrome": 
+                    current_mult *= 1.5
 
-        # 3. Held in Hand Effects
+        # 3. 手牌中持有效果（如钢牌）
         for card in held_cards:
             if card.enhancement == "Steel":
                 current_mult *= 1.5
 
-        # 4. Global Joker Effects (Left -> Right)
+        # 4. 小丑全局效果（左→右）
         for joker in jokers:
             current_mult += joker.passive_mult
             if joker.passive_x_mult > 1:
-                current_mult *= joker.passive_x_mult
+                current_mult *= joker.passive_x_mult   # X倍率最后算
 
         return int(current_chips) * int(current_mult)
 ```
-## 8. Development Roadmap for AI
-1. Phase 1: Logic & Data: Implement Card, Deck, HandEvaluator logic without UI.
 
-2. Phase 2: Loop: Implement the GameLoop (Draw -> Play -> Discard -> Score).
+## 8. AI 开发路线图
+1. **阶段 1**：逻辑与数据 —— 实现 Card、Deck、手牌判定逻辑（无 UI）  
+2. **阶段 2**：游戏循环 —— 实现抽牌 → 出牌 → 丢弃 → 计分的完整循环  
+3. **阶段 3**：小丑引擎 —— 建立 Joker 基类与触发系统  
+4. **阶段 4**：商店与经济 —— 实现金钱计算、商店生成  
+5. **阶段 5**：UI 与交互 —— 将逻辑接入可视化界面
 
-3. Phase 3: Joker Engine: Create the Joker base class and implement the trigger system.
-
-4. Phase 4: Shop & Economy: Implement money calculation and shop generation.
-
-5. Phase 5: UI/Interaction: Connect logic to a visual interface.
+</DOCUMENT>
