@@ -1,3 +1,5 @@
+# 还待完成
+
 # 🎴 Joker-Card: 局域网小丑牌狂欢+炸金花！ 🃏
 
 [![Unity](https://img.shields.io/badge/Unity-2022%2B-blue.svg)](https://unity.com/) [![Mirror](https://img.shields.io/badge/Mirror-Networking-brightgreen.svg)](https://mirror-networking.com/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -70,3 +72,8 @@ MIT License – 随意修改、分发，但请保留原作者信息。
 
 ## TODO List
 - [ ] 在选头像名字的时候，不能点加入房间/别的
+- [ ] 扫二维码加入房间功能
+
+
+## 其他的想法
+- [ ] 实现骗子酒馆、Inscryption的3D效果

@@ -122,7 +122,7 @@ public class GameManager : NetworkBehaviour
         // 4. 发牌
         foreach (PlayerData player in players)
         {
-            List<Card> handCards = deck.DealCards(handCardCount);
+            List<CardData> handCards = deck.DealCards(handCardCount);
             player.SetHandCards(handCards);
         }
 
@@ -136,7 +136,7 @@ public class GameManager : NetworkBehaviour
     /// 玩家出牌
     /// </summary>
     [Server]
-    public void PlayCards(PlayerData player, List<Card> cardsToPlay)
+    public void PlayCards(PlayerData player, List<CardData> cardsToPlay)
     {
         if (!gameStarted || gameEnded)
             return;
@@ -151,17 +151,17 @@ public class GameManager : NetworkBehaviour
             return;
 
         // 检查手牌是否包含这些牌（从JSON反序列化）
-        List<Card> handCards = new List<Card>();
+        List<CardData> handCards = new List<CardData>();
         if (!string.IsNullOrEmpty(player.handCardsJson))
         {
-            CardListWrapper wrapper = JsonUtility.FromJson<CardListWrapper>(player.handCardsJson);
-            handCards = wrapper.cards ?? new List<Card>();
+            CardDataListWrapper wrapper = JsonUtility.FromJson<CardDataListWrapper>(player.handCardsJson);
+            handCards = wrapper.cards != null ? new List<CardData>(wrapper.cards) : new List<CardData>();
         }
         if (!cardsToPlay.All(c => handCards.Any(h => h.suit == c.suit && h.rank == c.rank)))
             return;
 
         // 移除手牌中的这些牌
-        foreach (Card card in cardsToPlay)
+        foreach (CardData card in cardsToPlay)
         {
             handCards.RemoveAll(c => c.suit == card.suit && c.rank == card.rank);
         }
@@ -183,12 +183,12 @@ public class GameManager : NetworkBehaviour
         player.remainingPlayCount--;
 
         // 所有牌（包括出的和没出的）随机插入牌组
-        List<Card> allCards = new List<Card>(handCards);
+        List<CardData> allCards = new List<CardData>(handCards);
         allCards.AddRange(cardsToPlay);
         deck.ReturnCards(allCards);
 
         // 清空手牌
-        player.SetHandCards(new List<Card>());
+        player.SetHandCards(new List<CardData>());
         player.hasPlayedCard = true;
 
         // 通知所有客户端
@@ -240,7 +240,7 @@ public class GameManager : NetworkBehaviour
     /// 玩家弃牌
     /// </summary>
     [Server]
-    public void DiscardCards(PlayerData player, List<Card> cardsToDiscard)
+    public void DiscardCards(PlayerData player, List<CardData> cardsToDiscard)
     {
         if (!gameStarted || gameEnded)
             return;
@@ -259,17 +259,17 @@ public class GameManager : NetworkBehaviour
             return;
 
         // 检查手牌（从JSON反序列化）
-        List<Card> handCards = new List<Card>();
+        List<CardData> handCards = new List<CardData>();
         if (!string.IsNullOrEmpty(player.handCardsJson))
         {
-            CardListWrapper wrapper = JsonUtility.FromJson<CardListWrapper>(player.handCardsJson);
-            handCards = wrapper.cards ?? new List<Card>();
+            CardDataListWrapper wrapper = JsonUtility.FromJson<CardDataListWrapper>(player.handCardsJson);
+            handCards = wrapper.cards != null ? new List<CardData>(wrapper.cards) : new List<CardData>();
         }
         if (!cardsToDiscard.All(c => handCards.Any(h => h.suit == c.suit && h.rank == c.rank)))
             return;
 
         // 移除手牌
-        foreach (Card card in cardsToDiscard)
+        foreach (CardData card in cardsToDiscard)
         {
             handCards.RemoveAll(c => c.suit == card.suit && c.rank == card.rank);
         }
@@ -278,7 +278,7 @@ public class GameManager : NetworkBehaviour
         deck.ReturnCards(cardsToDiscard);
 
         // 立即摸等数量的牌
-        List<Card> newCards = deck.DealCards(cardsToDiscard.Count);
+        List<CardData> newCards = deck.DealCards(cardsToDiscard.Count);
         handCards.AddRange(newCards);
 
         // 更新手牌
@@ -413,7 +413,7 @@ public class GameManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void RpcOnPlayerPlayedCards(uint playerNetId, Card[] cards, int score)
+    private void RpcOnPlayerPlayedCards(uint playerNetId, CardData[] cards, int score)
     {
         if (gameUI == null)
             gameUI = FindFirstObjectByType<GameUI>();
@@ -461,12 +461,6 @@ public class GameManager : NetworkBehaviour
 
     // JSON 包装类
     [System.Serializable]
-    private class CardListWrapper
-    {
-        public List<Card> cards;
-    }
-
-    [System.Serializable]
     private class JokerListWrapper
     {
         public List<JokerData> jokers;
@@ -474,7 +468,7 @@ public class GameManager : NetworkBehaviour
 
     // 命令方法
     [Command(requiresAuthority = false)]
-    public void CmdPlayCards(uint playerNetId, Card[] cards, NetworkConnectionToClient sender = null)
+    public void CmdPlayCards(uint playerNetId, CardData[] cards, NetworkConnectionToClient sender = null)
     {
         if (sender == null) return;
         PlayerData playerData = sender.identity.GetComponent<PlayerData>();
@@ -496,7 +490,7 @@ public class GameManager : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdDiscardCards(uint playerNetId, Card[] cards, NetworkConnectionToClient sender = null)
+    public void CmdDiscardCards(uint playerNetId, CardData[] cards, NetworkConnectionToClient sender = null)
     {
         if (sender == null) return;
         PlayerData playerData = sender.identity.GetComponent<PlayerData>();

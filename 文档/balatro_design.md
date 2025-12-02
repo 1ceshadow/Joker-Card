@@ -1,5 +1,6 @@
 <DOCUMENT filename="balatro_design_zh.md">
-# Balatro 克隆版：技术设计文档 (TDD)
+
+# Balatro 机制拆解
 
 ## 1. 项目概述
 **目标**：忠实还原《Balatro》的核心机制  

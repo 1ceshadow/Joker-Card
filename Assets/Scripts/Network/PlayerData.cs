@@ -54,9 +54,9 @@ public class PlayerData : NetworkBehaviour
     public string playedCardsJson = ""; // 出的牌JSON
 
     // 本地缓存
-    private List<Card> handCards = new List<Card>();
+    private List<CardData> handCards = new List<CardData>();
     private List<JokerData> jokers = new List<JokerData>();
-    private List<Card> playedCards = new List<Card>();
+    private List<CardData> playedCards = new List<CardData>();
 
     // 事件
     public System.Action OnDataChanged;
@@ -82,17 +82,17 @@ public class PlayerData : NetworkBehaviour
     }
 
     [Server]
-    public void SetHandCards(List<Card> cards)
+    public void SetHandCards(List<CardData> cards)
     {
         handCards = cards;
-        handCardsJson = JsonUtility.ToJson(new CardListWrapper { cards = cards });
+        handCardsJson = JsonUtility.ToJson(new CardDataListWrapper { cards = cards.ToArray() });
     }
 
     [Server]
-    public void SetPlayedCards(List<Card> cards)
+    public void SetPlayedCards(List<CardData> cards)
     {
         playedCards = cards;
-        playedCardsJson = JsonUtility.ToJson(new CardListWrapper { cards = cards });
+        playedCardsJson = JsonUtility.ToJson(new CardDataListWrapper { cards = cards.ToArray() });
     }
 
     [Server]
@@ -162,11 +162,11 @@ public class PlayerData : NetworkBehaviour
     }
 
     // 获取本地手牌（仅本地玩家）
-    public List<Card> GetHandCards()
+    public List<CardData> GetHandCards()
     {
         if (isLocalPlayer)
             return handCards;
-        return new List<Card>();
+        return new List<CardData>();
     }
 
     // 获取小丑牌
@@ -176,7 +176,7 @@ public class PlayerData : NetworkBehaviour
     }
 
     // 获取出的牌
-    public List<Card> GetPlayedCards()
+    public List<CardData> GetPlayedCards()
     {
         return playedCards;
     }
@@ -206,8 +206,8 @@ public class PlayerData : NetworkBehaviour
     {
         if (!string.IsNullOrEmpty(newValue))
         {
-            CardListWrapper wrapper = JsonUtility.FromJson<CardListWrapper>(newValue);
-            handCards = wrapper.cards ?? new List<Card>();
+            CardDataListWrapper wrapper = JsonUtility.FromJson<CardDataListWrapper>(newValue);
+            handCards = wrapper.cards != null ? new List<CardData>(wrapper.cards) : new List<CardData>();
         }
         OnDataChanged?.Invoke();
     }
@@ -226,8 +226,8 @@ public class PlayerData : NetworkBehaviour
     {
         if (!string.IsNullOrEmpty(newValue))
         {
-            CardListWrapper wrapper = JsonUtility.FromJson<CardListWrapper>(newValue);
-            playedCards = wrapper.cards ?? new List<Card>();
+            CardDataListWrapper wrapper = JsonUtility.FromJson<CardDataListWrapper>(newValue);
+            playedCards = wrapper.cards != null ? new List<CardData>(wrapper.cards) : new List<CardData>();
         }
         OnDataChanged?.Invoke();
     }
@@ -249,12 +249,6 @@ public class PlayerData : NetworkBehaviour
 
 
     // JSON 包装类
-    [System.Serializable]
-    private class CardListWrapper
-    {
-        public List<Card> cards;
-    }
-
     [System.Serializable]
     private class JokerListWrapper
     {

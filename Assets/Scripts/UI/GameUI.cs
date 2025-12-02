@@ -43,7 +43,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private ResultUI resultUI;
 
     private PlayerData localPlayer;
-    private List<Card> selectedCards = new List<Card>();
+    private List<CardData> selectedCards = new List<CardData>();
     private List<GameObject> handCardObjects = new List<GameObject>();
     private Dictionary<uint, GameObject> playerAvatarObjects = new Dictionary<uint, GameObject>();
     private bool isMyTurn = false;
@@ -127,14 +127,14 @@ public class GameUI : MonoBehaviour
         handCardObjects.Clear();
 
         // 创建手牌UI
-        List<Card> handCards = localPlayer.GetHandCards();
-        foreach (Card card in handCards)
+        List<CardData> handCards = localPlayer.GetHandCards();
+        foreach (CardData cardData in handCards)
         {
             GameObject cardObj = Instantiate(cardPrefab, handCardsParent);
             CardUI cardUI = cardObj.GetComponent<CardUI>();
             if (cardUI != null)
             {
-                cardUI.Initialize(card, OnCardClicked);
+                cardUI.Initialize(cardData, OnCardClicked);
             }
             handCardObjects.Add(cardObj);
         }
@@ -190,16 +190,16 @@ public class GameUI : MonoBehaviour
             betButton.interactable = canBet && isMyTurn;
     }
 
-    private void OnCardClicked(Card card, bool isSelected)
+    private void OnCardClicked(CardData cardData, bool isSelected)
     {
         if (isSelected)
         {
             if (selectedCards.Count < 5)
-                selectedCards.Add(card);
+                selectedCards.Add(cardData);
         }
         else
         {
-            selectedCards.RemoveAll(c => c.suit == card.suit && c.rank == card.rank);
+            selectedCards.RemoveAll(c => c.suit == cardData.suit && c.rank == cardData.rank);
         }
         UpdateButtonStates();
     }
@@ -268,7 +268,7 @@ public class GameUI : MonoBehaviour
         UpdateButtonStates();
     }
 
-    public void OnPlayerPlayedCards(uint playerNetId, List<Card> cards, int score)
+    public void OnPlayerPlayedCards(uint playerNetId, List<CardData> cards, int score)
     {
         // 在中心显示出的牌
         ShowPlayedCards(playerNetId, cards, score);
@@ -308,7 +308,7 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    private void ShowPlayedCards(uint playerNetId, List<Card> cards, int score)
+    private void ShowPlayedCards(uint playerNetId, List<CardData> cards, int score)
     {
         // 清除中心区域的牌
         foreach (Transform child in centerCardsParent)
@@ -319,13 +319,13 @@ public class GameUI : MonoBehaviour
         // 显示出的牌
         if (cardPrefab != null)
         {
-            foreach (Card card in cards)
+            foreach (CardData cardData in cards)
             {
                 GameObject cardObj = Instantiate(cardPrefab, centerCardsParent);
                 CardUI cardUI = cardObj.GetComponent<CardUI>();
                 if (cardUI != null)
                 {
-                    cardUI.Initialize(card, null);
+                    cardUI.Initialize(cardData, null);
                 }
             }
         }

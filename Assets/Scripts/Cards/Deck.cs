@@ -9,7 +9,7 @@ using System.Linq;
 /// </summary>
 public class Deck
 {
-    private List<Card> cards = new List<Card>();
+    private List<CardData> cards = new List<CardData>();
 
     public Deck()
     {
@@ -22,11 +22,11 @@ public class Deck
     private void InitializeDeck()
     {
         cards.Clear();
-        foreach (Card.Suit suit in System.Enum.GetValues(typeof(Card.Suit)))
+        foreach (CardData.Suit suit in System.Enum.GetValues(typeof(CardData.Suit)))
         {
             for (int rank = 2; rank <= 14; rank++) // 2-10, J(11), Q(12), K(13), A(14)
             {
-                cards.Add(new Card(suit, rank));
+                cards.Add(new CardData(suit, rank));
             }
         }
     }
@@ -38,7 +38,7 @@ public class Deck
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            Card temp = cards[i];
+            CardData temp = cards[i];
             int randomIndex = Random.Range(i, cards.Count);
             cards[i] = cards[randomIndex];
             cards[randomIndex] = temp;
@@ -48,9 +48,9 @@ public class Deck
     /// <summary>
     /// 发指定数量的牌
     /// </summary>
-    public List<Card> DealCards(int count)
+    public List<CardData> DealCards(int count)
     {
-        List<Card> dealtCards = new List<Card>();
+        List<CardData> dealtCards = new List<CardData>();
         for (int i = 0; i < count && cards.Count > 0; i++)
         {
             dealtCards.Add(cards[0]);
@@ -62,11 +62,11 @@ public class Deck
     /// <summary>
     /// 抽一张牌
     /// </summary>
-    public Card DrawCard()
+    public CardData DrawCard()
     {
         if (cards.Count > 0)
         {
-            Card card = cards[0];
+            CardData card = cards[0];
             cards.RemoveAt(0);
             return card;
         }
@@ -76,9 +76,9 @@ public class Deck
     /// <summary>
     /// 将牌放回牌组（随机位置）
     /// </summary>
-    public void ReturnCards(List<Card> cardsToReturn)
+    public void ReturnCards(List<CardData> cardsToReturn)
     {
-        foreach (Card card in cardsToReturn)
+        foreach (CardData card in cardsToReturn)
         {
             int randomIndex = Random.Range(0, cards.Count + 1);
             cards.Insert(randomIndex, card);
@@ -88,7 +88,7 @@ public class Deck
     /// <summary>
     /// 将单张牌放回牌组
     /// </summary>
-    public void ReturnCard(Card card)
+    public void ReturnCard(CardData card)
     {
         if (card != null)
         {

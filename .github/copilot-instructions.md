@@ -92,7 +92,7 @@ HandType type = Scoring.DetectHandType(cards);  // HighCard → StraightFlush
 Authoritative docs in `文档/`: 只是初步拟定，不一定完全正确
 - `QUICK_REFERENCE.md` – Flow diagrams, parameter tables
 - `NETWORK_SETUP.md` – Transport config, troubleshooting
-- `SETUP_GUIDE.md` – Prefab/scene configuration
+- `PROGECT_GUIDE.md` – 项目完整结构与说明
 - `balatro_design.md` – Detailed Balatro mechanics reference
 
 ## Do Not
@@ -106,3 +106,6 @@ Authoritative docs in `文档/`: 只是初步拟定，不一定完全正确
 - 有注释
 - 大胆改，原代码有不合理的(即使和文档一致)、性能差的，可以告诉我，直接改
 - 可以用MCP工具 unity、unity-MCP
+- 可以用DOTS/ECS、Job System、Burst Compiler
+- 可以用第三方插件（但要告诉我用的什么插件，最好是免费的）
+- 尽量保持SOLID原则，低耦合、高内聚、易拓展，避免硬编码

@@ -63,7 +63,7 @@ public static class CardSpriteLoader
     /// <summary>
     /// 获取卡牌 Sprite
     /// </summary>
-    public static Sprite GetCardSprite(Card.Suit suit, int rank)
+    public static Sprite GetCardSprite(CardData.Suit suit, int rank)
     {
         if (cardSprites == null || !isLoaded)
             LoadCardSprites();
